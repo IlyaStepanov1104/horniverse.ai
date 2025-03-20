@@ -67,20 +67,42 @@ class User extends Authenticatable
             ]
         ];
 
-        $response = Http::post($rpcUrl, $postData);
+        // Переменная для количества попыток
+        $attempts = 0;
+        $maxAttempts = 3;
+        $delay = 2; // Задержка между попытками в секундах
 
-        if ($response->failed()) {
+        while ($attempts < $maxAttempts) {
+            $response = Http::post($rpcUrl, $postData);
+
+            // Если запрос успешен, обрабатываем ответ
+            if ($response->successful()) {
+                $data = $response->json();
+
+                if (empty($data["result"]["value"])) {
+                    return 0;
+                }
+
+                return $data["result"]["value"][0]["account"]["data"]["parsed"]["info"]["tokenAmount"]["uiAmount"];
+            }
+
+            // Если получена ошибка 429 (слишком много запросов)
+            if ($response->json()['error']['code'] === 429) {
+                $attempts++;
+
+                // Ждем перед повторной попыткой
+                sleep($delay);
+                continue;
+            }
+
+            // Для других ошибок возвращаем 0
             return 0;
         }
 
-        $data = $response->json();
-
-        if (empty($data["result"]["value"])) {
-            return 0;
-        }
-
-        return $data["result"]["value"][0]["account"]["data"]["parsed"]["info"]["tokenAmount"]["uiAmount"];
+        // Если не удалось получить данные после нескольких попыток
+        return "Ошибка: не удалось получить баланс после {$maxAttempts} попыток.";
     }
+
 
 
     public function getWillGetAttempsAttribute()
