@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Prize;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -13,12 +14,40 @@ use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use App\Models\ShareLink;
 
+use Illuminate\Support\Str;
 use Session;
 
 
 class Front extends Controller
 {
     // То же что и type script только все переменные не нужно заранее объявлять и они обозначаются значком доллара $ а методы вызываются через стрелочку
+
+
+    public function generatePrize()
+    {
+        // Проверка, существует ли пользователь
+        $user = Auth::user();
+        if (!$user) {
+            return response()->json(['error' => 'Пользователь не найден'], 404);
+        }
+
+        // Генерация уникального кода для приза
+        do {
+            $prizeCode = (string) Str::uuid(); // Генерация UUID
+        } while (Prize::where('prize_code', $prizeCode)->exists()); // Проверка на уникальность
+
+        // Создание записи в таблице призов
+        $prize = Prize::create([
+            'user_id' => $user->id,
+            'prize_code' => $prizeCode,
+            'received_at' => Carbon::now(),
+        ]);
+
+        return response()->json([
+            'message' => 'Приз успешно сгенерирован!',
+            'prize' => $prize,
+        ], 201);
+    }
 
     public function getSolanaTokenBalance()
     {

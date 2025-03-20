@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/admin', [AdminAuthController::class, 'redirectToAdmin']);
+Route::get('/get-config', [AdminController::class, 'getConfigValueCallback']);
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login']);
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
