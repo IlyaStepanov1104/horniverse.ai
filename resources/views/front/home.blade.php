@@ -201,6 +201,7 @@
 
 </body>
 <script>
+    let interval;
 
     $('.free-game').click(() => {
         $('.popup-1').show();
@@ -216,7 +217,7 @@
                 $('.cutscences #intro').show();
                 $('.cutscences #intro')[0].play();
                 $('.cutscences #win').hide();
-                setTimeout(() => {
+                interval = setTimeout(() => {
                     $('.cutscences').addClass('hide');
                 }, 59000);
                 $(this).fadeOut(1000);
@@ -240,6 +241,7 @@
         $(this).fadeOut(1000);
         $('.cutscences').addClass('hide');
         $('.cutscences #intro')[0].pause();
+        clearInterval(interval);
     });
 
     $.ajaxSetup({
