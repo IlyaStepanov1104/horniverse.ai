@@ -123,7 +123,7 @@ class Front extends Controller
         // Возвращаем ответ c токеном
         // return response()->json(['message' => 'Login successful', 'token' => $token, 'user_id' => $user->id]);
 
-        // Редиректим на залогинивание через токен 
+        // Редиректим на залогинивание через токен
 //        return redirect('/token-login?token=' . $token . '&id=' . $user->id);
         // Либо возваращаем на главную страницу c залогиниванием через laravel auth
         Auth::loginUsingId($user->id);
@@ -179,6 +179,7 @@ class Front extends Controller
         $user = User::firstOrCreate(['token' => $token]);
         Auth::login($user);
         $user->balance = $user->solana_balance;
+        $user->get_attemps = $user->will_get_attemps;
 
         return $user;
     }
@@ -404,12 +405,12 @@ class Front extends Controller
             // array(
             //     'Плюс магией',
             //     'Плюс магией',
-            //     'Плюс магией',         
+            //     'Плюс магией',
             // ),
             // array(
             //     'Типом',
             //     'Типом',
-            //     'Типом',         
+            //     'Типом',
             // ),
             array(
                 'You won!',

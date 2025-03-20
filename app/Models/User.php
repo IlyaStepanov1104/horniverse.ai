@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -78,5 +79,25 @@ class User extends Authenticatable
         }
 
         return $data["result"]["value"][0]["account"]["data"]["parsed"]["info"]["tokenAmount"]["uiAmount"];
+    }
+
+
+    public function getWillGetAttempsAttribute()
+    {
+        $gold = AdminController::getConfigValue('gold_attempts');
+        $silver = AdminController::getConfigValue('silver_attempts');
+        $bronze = AdminController::getConfigValue('bronze_attempts');
+
+        $balance = $this->solana_balance;
+
+        if ($balance >= $gold) {
+            return 10;
+        } elseif ($balance >= $silver) {
+            return 5;
+        } elseif ($balance >= $bronze) {
+            return 3;
+        } else {
+            return 1;
+        }
     }
 }
