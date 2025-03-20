@@ -126,7 +126,7 @@
                 </div>
             </div>
             <div class="cutscences" style="transition: opacity 2s ease-in-out;">
-                <form class="flex js-win-form" style="display: none;">
+                <form class="flex js-win-form win-form" style="display: none;">
                     <h3 style="color: white">Your prize code:</h3>
                     <input class="action code-input" placeholder="Loading code..." disabled/>
                     <input class="action tg-input" placeholder="Enter your telegram @username"
