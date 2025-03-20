@@ -203,7 +203,7 @@
                 <h2 style="white-space: pre-wrap">{{$message}}</h2>
                 <div>
                     <h3>Come back to try in:</h3>
-                    <div id="timer" style="font-size: 24px; font-weight: bold;"></div>
+                    <div id="timer" style="font-size: 24px; font-weight: bold; color: #EF4A82;"></div>
                 </div>
                 <a href="../" class="btn action">Back to site</a>
             </div>
