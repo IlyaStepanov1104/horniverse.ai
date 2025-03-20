@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/game/admin/css/sb-admin-2.css">
 </head>
 <body>
-<div class="container">
+<div class=" container-md">
     <h1>Настройки конфигурации</h1>
 
     @if(session('success'))
@@ -40,7 +40,7 @@
     </form>
 </div>
 <hr>
-<div class="container">
+<div class=" container-md">
     <h2>Сундук</h2>
     <ul>
         <li>Количество монет - {{$chest->attemps}}</li>
@@ -48,7 +48,7 @@
     </ul>
 </div>
 <hr>
-<div class="container">
+<div class=" container-md">
     <h2>Призовые ссылки</h2>
     <table class="table table-striped">
         <thead>
@@ -78,7 +78,7 @@
     </table>
 </div>
 <hr>
-<div class="container">
+<div class=" container-md">
     <form action="{{ route('admin.logout') }}" method="POST" class="form-inline pos-a">
         @csrf
         <button class="btn btn-outline-danger" type="submit">Выйти</button>
