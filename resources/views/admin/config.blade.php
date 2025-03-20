@@ -47,8 +47,8 @@
             Количество монет -
             <span id="coins-display">{{$chest->attemps}}</span>
             <input type="number" id="coins-input" value="{{$chest->attemps}}" style="display: none; width: 80px;">
-            <button id="edit-coins">✏️</button>
-            <button id="save-coins" style="display: none;">💾</button>
+            <button id="edit-coins" class="coins-btn">✏️</button>
+            <button id="save-coins" style="display: none;" class="coins-btn">💾</button>
         </li>
         <li>Победителей - {{$chest->wins}}</li>
     </ul>
