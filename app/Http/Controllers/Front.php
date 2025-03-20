@@ -23,10 +23,10 @@ class Front extends Controller
 {
     // То же что и type script только все переменные не нужно заранее объявлять и они обозначаются значком доллара $ а методы вызываются через стрелочку
 
-    public function getConfigValueCallback($request): string | null
+    public function getConfigValueCallback(Request $request)
     {
-        $config = Configuration::where('key', $request->input('key'))->first();
-        return $config ? $config->value : null;
+        $key = $request->input('key');
+        return AdminController::getConfigValue($key);
     }
 
     public function generatePrize()
