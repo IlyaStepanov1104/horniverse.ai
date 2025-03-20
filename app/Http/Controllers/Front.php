@@ -117,9 +117,10 @@ class Front extends Controller
         $user->save();
     }
 
-    public function subscribe()
+    public function subscribe(Request $request)
     {
-        $user = Auth::user();
+        $token = $request->input('token');
+        $user = User::where('token', $token)->first();
         if ($user->subscribe) return response()->json(['type' => 'error'], 400);
         $user->subscribed = true;
         $user->attemps += 1;
@@ -127,9 +128,10 @@ class Front extends Controller
         return response()->json(['type' => 'subscribe']);
     }
 
-    public function storeLink()
+    public function storeLink(Request $request)
     {
-        $user = Auth::user();
+        $token = $request->input('token');
+        $user = User::where('token', $token)->first();
         if ($user->reposted) return response()->json(['type' => 'error'], 400);
         $user->reposted = 1;
         $user->attemps += 1;
