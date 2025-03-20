@@ -52,6 +52,7 @@ Route::any('/validate-user', [Front::class, 'validateUser']);
 Route::any('/choice', [Front::class, 'choice']);
 Route::get('/chat-gpt', [Front::class, 'chatGPT']);
 Route::get('/game', [Front::class, 'game']);
+Route::post('/send_telegram', [Front::class, 'sendTelegram']);
 
 Route::post('/wallet-login', [Front::class, 'walletLogin']);
 Route::get('/logout', [Front::class, 'logout']);

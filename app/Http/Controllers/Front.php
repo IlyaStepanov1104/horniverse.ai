@@ -23,6 +23,13 @@ class Front extends Controller
 {
     // То же что и type script только все переменные не нужно заранее объявлять и они обозначаются значком доллара $ а методы вызываются через стрелочку
 
+    public function sendTelegram($request) {
+        $user = Auth::user();
+        $user->telegram_id = $request->get('telegram_username');
+        $user->save();
+        return response()->json(['message' => 'Success']);
+    }
+
     public function getLeaderboard()
     {
         $topPlayers = DB::table('users')
