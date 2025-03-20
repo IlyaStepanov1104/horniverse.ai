@@ -96,8 +96,6 @@ class Front extends Controller
 
         $user->attemps -= 1;
 
-        DB::table('chest')->where('id', 1)->increment('attemps');
-
         $user->save();
 
         return response()->json(['type' => 'started']);
