@@ -1,0 +1,440 @@
+:root {
+  --ideal-viewport-width: 414;
+  --current-viewport-width: 100vw;
+}
+
+body {
+  font-family: Tschinchold;
+  font-size: calc(16 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  background-image: url(/game/images/game/environment/end/Bg.png);
+  background-size: contain;
+  background-repeat: repeat-x;
+}
+
+body:has(#telegram-login-UniCornBotGame_Bot) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.ai {
+  font-size: calc(19 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  text-align: center;
+  position: absolute;
+  top: calc(16 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  width: 44%;
+  left: 28%;
+}
+
+.ai img {
+  margin-top: calc(-40 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+}
+
+.ai small {
+  position: absolute;
+  right: -50px;
+  bottom: -4px;
+  font-size: 17px;
+  opacity: 0.5;
+}
+
+div {
+  position: relative;
+}
+
+@font-face {
+  font-family: Tschinchold;
+  src: url("/game/fonts/Tschinchold.TTF");
+  font-weight: 300;
+  font-style: normal;
+}
+#game {
+  width: 100vw;
+  max-width: 500px;
+  height: 100%;
+  max-height: 95vh;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat-x;
+  transition: 1.5s;
+}
+
+.game-container {
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+}
+
+.front:has(.player.weaponry) {
+  left: -15%;
+}
+
+.front:has(.player.boss) {
+  left: -26%;
+  top: 38%;
+}
+
+.btn-check:focus + .btn, .btn:focus {
+  box-shadow: none !important;
+}
+
+.front {
+  position: absolute;
+  bottom: calc(73% - 400px);
+  left: -14%;
+  z-index: 6;
+  transition: 1s;
+}
+
+.player {
+  width: calc(380 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  height: calc(380 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  z-index: 7;
+}
+
+.player > img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: 100%;
+}
+
+.ui {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  max-width: 500px;
+  height: 100%;
+  z-index: 9;
+  display: flex;
+  gap: calc(15 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  color: #fff;
+}
+
+#lose {
+  position: absolute;
+  z-index: 99;
+  color: #fff;
+  font-size: calc(85 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  text-transform: uppercase;
+  top: 35%;
+  width: 100%;
+  text-align: center;
+}
+
+.description {
+  position: absolute;
+  top: calc(65 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  left: calc(10 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  z-index: 9;
+  color: #fff;
+  padding: calc(25 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  width: calc(100% - calc(20 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width)));
+  text-align: left;
+  background-image: url(/game/images/game/ui/Dialog.png);
+  background-size: contain;
+  background-position: top;
+  background-repeat: no-repeat;
+  height: calc(140 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+}
+
+.description p {
+  max-height: calc(100 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  overflow: auto;
+}
+
+.cutscences {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  width: 100vw;
+  max-width: 500px;
+  height: 100%;
+  transition: 2s;
+  opacity: 1;
+  background: #000;
+}
+
+.cutscences.hide {
+  z-index: -1;
+  opacity: 0;
+}
+
+.cutscences video {
+  max-width: 100%;
+  height: auto;
+  min-height: 100vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: absolute;
+}
+
+.cutscences:not(:has(.restart)) {
+  background-image: url(/game/images/game/cutscenes/Preview.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.btn.start {
+  position: absolute;
+  bottom: 50%;
+  z-index: 9;
+}
+
+.btn.buy {
+  position: absolute;
+  bottom: calc(50% - 10px - calc(65 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width)));
+  z-index: 9;
+}
+
+.btn.free-game {
+  position: absolute;
+  bottom: 100px;
+  z-index: 9;
+}
+
+.skip {
+  position: absolute;
+  bottom: calc(2 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  right: calc(0 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  color: #7f7f7f;
+  font-size: calc(20 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+}
+
+.btn.start.restart {
+  bottom: calc(20 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  width: 47% !important;
+  background-size: 100% 100%;
+}
+
+.btn.action.to-site {
+  position: absolute;
+  width: 47% !important;
+  z-index: 4;
+  background-size: 100% 100% !important;
+  right: calc(12 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  bottom: calc(20 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+}
+
+.btn.to-site {
+  bottom: calc(100 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+}
+
+.chest {
+  position: absolute;
+  width: 55%;
+  left: 22%;
+  top: calc(28 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  background-image: url(/game/images/game/ui/Chest.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+  height: calc(51 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chest img {
+  width: calc(45 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  margin-right: calc(8 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+}
+
+.chest img:last-child {
+  width: calc(24 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  margin-left: calc(10 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  margin-right: 0;
+}
+
+.chest p {
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+}
+
+.ui .bottom {
+  position: absolute;
+  bottom: calc(10 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  left: 0;
+  width: 100vw;
+  max-width: 500px;
+}
+
+.ui .bottom > p {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+#choices:has(:nth-child(4)) {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#choices:has(:nth-child(4)) .btn {
+  max-width: 47%;
+  background-size: 100% 100%;
+  height: calc(45 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+}
+
+.btn.action {
+  color: #000;
+  background-image: url(/game/images/game/ui/Btn-Static.png);
+  background-size: contain;
+  background-position: center;
+  height: calc(65 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  width: calc(100% - calc(20 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width))) !important;
+  margin-left: calc(10 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  font-size: calc(18 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+  color: #fff;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: calc(10 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+}
+
+.btn.action:hover {
+  background-image: url(/game/images/game/ui/Btn-On.png);
+  padding-top: calc(4 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+}
+
+.btn.action:focus {
+  background-image: url(/game/images/game/ui/Btn-Click.png);
+  padding-top: calc(10 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width));
+}
+
+.bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100%;
+  max-width: 500px;
+}
+
+.bg > div {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  max-width: 500px;
+  height: 90vh;
+  background-size: 100% auto;
+  background-position: top;
+  background-repeat: no-repeat;
+  animation-fill-mode: forwards;
+  animation-name: showHide;
+  animation-direction: reverse;
+  animation-timing-function: ease-in-out;
+  animation-duration: 1s;
+}
+
+.bg > .showing {
+  transform: translateY(100%);
+}
+
+.bg .layer-0 {
+  z-index: 1;
+  animation-delay: 0.4s;
+}
+
+.bg .layer-1 {
+  z-index: 2;
+  animation-delay: 0.3s;
+}
+
+.bg .layer-2 {
+  z-index: 3;
+  animation-delay: 0.2s;
+}
+
+.bg .layer-3 {
+  z-index: 4;
+  animation-delay: 0.1s;
+}
+
+.bg .layer-4 {
+  z-index: 5;
+}
+
+.bg > .hide {
+  animation-name: showHide2;
+  animation-direction: normal;
+}
+
+#game.hide {
+  filter: brightness(0.5);
+}
+
+@keyframes showHide {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+@keyframes showHide2 {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+@media (min-width: 500px) {
+  #game {
+    max-height: 100vh;
+  }
+  .cutscences video {
+    top: inherit !important;
+    bottom: 0;
+    -o-object-position: bottom;
+    object-position: bottom;
+    max-height: 100vh;
+    width: 100%;
+  }
+  .front {
+    bottom: calc(53% - 400px);
+    left: -24%;
+  }
+}/*# sourceMappingURL=style.css.map */
+
+.popup {
+  position: absolute;
+  z-index: 9999;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup .flex {
+  background-color: #08262a;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.popup .btn {
+  margin: 0;
+  width: 100% !important;
+}
+
+.popup input {
+  padding: 10px;
+}

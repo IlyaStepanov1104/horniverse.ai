@@ -1,0 +1,50 @@
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/game/images/Fav.png">
+    <title>Admin - Unicorn</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="/game/admin/css/sb-admin-2.css">
+</head>
+<body>
+<div class="container">
+    <h1>Настройки конфигурации</h1>
+
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <form action="{{ route('admin.config.update') }}" method="POST">
+        @csrf
+        @foreach($configurations as $config)
+            <div class="form-group">
+                <label for="{{ $config->key }}">{{ $config->name }}</label>
+                <input type="text" class="form-control" id="{{ $config->key }}" name="{{ $config->key }}"
+                       value="{{ $config->value }}">
+            </div>
+        @endforeach
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>
+    <hr>
+<div class="container">
+    <form action="{{ route('admin.logout') }}" method="POST" class="form-inline pos-a">
+        @csrf
+        <button class="btn btn-outline-danger" type="submit">Выйти</button>
+    </form>
+</div>
+</body>
+</html>

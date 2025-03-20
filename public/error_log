@@ -1,0 +1,2 @@
+[07-Sep-2023 17:14:42 Asia/Tashkent] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 7.4.0". You are running 7.1.33. in /home/fpbuz/public_html/vendor/composer/platform_check.php on line 24
+[11-Sep-2023 19:04:02 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/fpbuz/public_html/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php on line 28
