@@ -331,8 +331,14 @@ class Front extends Controller
         $user = Auth::user();
         $scene = $user->scene;
         $help = '';
-        $boss = DB::table('users')->where('id', $user->id)->first()->boss;
+        $boss = implode('', [rand(0, 2), rand(0, 5), rand(0, 2), rand(0, 2)]);
         if ($scene == 2) {
+            DB::table('users')->where('id', $user->id)->update(['scene' => 0]);
+            DB::table('users')->where('id', $user->id)->update(['magic' => '']);
+            DB::table('users')->where('id', $user->id)->update(['weapons' => '']);
+            DB::table('users')->where('id', $user->id)->update(['combination' => '']);
+            DB::table('users')->where('id', $user->id)->update(['boss' => implode('', [rand(0, 2), rand(0, 5), rand(0, 2), rand(0, 2)])]);
+
             $bossStates = substr($boss, 0, 3);
             $bossStatesArr = array(
                 array(
@@ -625,11 +631,11 @@ class Front extends Controller
                 DB::table('users')->where('id', $user->id)->update(['win' => now()]);
                 DB::table('chest')->where('id', 1)->increment('wins', 1);
 
-                DB::table('users')->where('id', $user->id)->update(['scene' => 0]);
-                DB::table('users')->where('id', $user->id)->update(['magic' => '']);
-                DB::table('users')->where('id', $user->id)->update(['weapons' => '']);
-                DB::table('users')->where('id', $user->id)->update(['combination' => '']);
-                DB::table('users')->where('id', $user->id)->update(['boss' => implode('', [rand(0, 2), rand(0, 5), rand(0, 2), rand(0, 2)])]);
+//                DB::table('users')->where('id', $user->id)->update(['scene' => 0]);
+//                DB::table('users')->where('id', $user->id)->update(['magic' => '']);
+//                DB::table('users')->where('id', $user->id)->update(['weapons' => '']);
+//                DB::table('users')->where('id', $user->id)->update(['combination' => '']);
+//                DB::table('users')->where('id', $user->id)->update(['boss' => implode('', [rand(0, 2), rand(0, 5), rand(0, 2), rand(0, 2)])]);
 
                 $this->generatePrize($user);
                 // $scene = 0;
@@ -639,11 +645,11 @@ class Front extends Controller
         }
 
         if ($acces != true) {
-            DB::table('users')->where('id', $user->id)->update(['scene' => 0]);
-            DB::table('users')->where('id', $user->id)->update(['magic' => '']);
-            DB::table('users')->where('id', $user->id)->update(['weapons' => '']);
-            DB::table('users')->where('id', $user->id)->update(['combination' => '']);
-            DB::table('users')->where('id', $user->id)->update(['boss' => implode('', [rand(0, 2), rand(0, 5), rand(0, 2), rand(0, 2)])]);
+//            DB::table('users')->where('id', $user->id)->update(['scene' => 0]);
+//            DB::table('users')->where('id', $user->id)->update(['magic' => '']);
+//            DB::table('users')->where('id', $user->id)->update(['weapons' => '']);
+//            DB::table('users')->where('id', $user->id)->update(['combination' => '']);
+//            DB::table('users')->where('id', $user->id)->update(['boss' => implode('', [rand(0, 2), rand(0, 5), rand(0, 2), rand(0, 2)])]);
             $scene = 13;
         }
         return response()->json([
