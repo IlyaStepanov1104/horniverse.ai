@@ -331,8 +331,9 @@ class Front extends Controller
         $user = Auth::user();
         $scene = $user->scene;
         $help = '';
-        $boss = implode('', [rand(0, 2), rand(0, 5), rand(0, 2), rand(0, 2)]);
+        $boss = $user->boss;
         if ($scene == 2) {
+            $boss = implode('', [rand(0, 2), rand(0, 5), rand(0, 2), rand(0, 2)]);
             DB::table('users')->where('id', $user->id)->update(['magic' => '']);
             DB::table('users')->where('id', $user->id)->update(['weapons' => '']);
             DB::table('users')->where('id', $user->id)->update(['combination' => '']);
