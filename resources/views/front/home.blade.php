@@ -178,6 +178,15 @@
             </div>
 
             <div class="ui">
+                <div class="chest">
+                    <img src="/game/images/game/ui/ChestIcon.png">
+                    <p>
+                        @if (Auth::check())
+                            Chest: {{ $chest }}
+                        @endif
+                        <img src="/game/images/game/ui/CoinAnimated.gif">
+                    </p>
+                </div>
                 <div class="description" id="userName">
                     <div class="ai" style="display: none;">
                         <big>Loading...</big>
