@@ -34,7 +34,7 @@ class AdminController extends Controller
     }
 
     // Публичный метод получения значения конфигурации
-    public static function getConfigValue($key)
+    public static function getConfigValue($key): string | null
     {
         $config = Configuration::where('key', $key)->first();
         return $config ? $config->value : null;

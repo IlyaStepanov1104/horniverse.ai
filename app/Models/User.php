@@ -85,9 +85,9 @@ class User extends Authenticatable
 
     public function getWillGetAttempsAttribute()
     {
-        $gold = AdminController::getConfigValue('gold_attempts');
-        $silver = AdminController::getConfigValue('silver_attempts');
-        $bronze = AdminController::getConfigValue('bronze_attempts');
+        $gold = (int) AdminController::getConfigValue('gold_attempts');
+        $silver = (int) AdminController::getConfigValue('silver_attempts');
+        $bronze = (int) AdminController::getConfigValue('bronze_attempts');
 
         $balance = $this->solana_balance;
 
