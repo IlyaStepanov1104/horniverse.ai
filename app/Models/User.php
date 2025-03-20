@@ -70,7 +70,7 @@ class User extends Authenticatable
         // Переменная для количества попыток
         $attempts = 0;
         $maxAttempts = 3;
-        $delay = 2; // Задержка между попытками в секундах
+        $delay = 5 + random_int(0, 5); // Задержка между попытками в секундах
 
         while ($attempts < $maxAttempts) {
             $response = Http::post($rpcUrl, $postData);
