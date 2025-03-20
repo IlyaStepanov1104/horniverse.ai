@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Prize;
 use Illuminate\Http\Request;
 use App\Models\Configuration;
 
@@ -16,7 +17,8 @@ class AdminController extends Controller
     {
         // Получаем все конфигурационные параметры
         $configurations = Configuration::all();
-        return view('admin.config', compact('configurations'));
+        $prizes = Prize::with('user')->get();
+        return view('admin.config', compact('configurations', 'prizes'));
     }
 
     public function updateConfig(Request $request)

@@ -39,7 +39,37 @@
         <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
 </div>
-    <hr>
+<hr>
+<div class="container">
+    <h2>Призовые ссылки</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Дата создания</th>
+            <th>Код</th>
+            <th>ID пользователя</th>
+            <th>Telegram</th>
+            <th>Кошелек</th>
+            <th>IP</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($prizes as $prize)
+            <tr>
+                <td>{{ $prize->id }}</td>
+                <td>{{ $prize->created_at }}</td>
+                <td>{{ $prize->prize_code }}</td>
+                <td>{{ $prize->user_id }}</td>
+                <td>{{ optional($prize->user)->telegram_id }}</td>
+                <td>{{ optional($prize->user)->wallet_address }}</td>
+                <td>{{ optional($prize->user)->ip }}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+</div>
+<hr>
 <div class="container">
     <form action="{{ route('admin.logout') }}" method="POST" class="form-inline pos-a">
         @csrf
