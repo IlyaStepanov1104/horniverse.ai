@@ -40,13 +40,46 @@
     </form>
 </div>
 <hr>
-<div class=" container-md">
+<div class="container-md">
     <h2>Сундук</h2>
     <ul>
-        <li>Количество монет - {{$chest->attemps}}</li>
+        <li>
+            Количество монет -
+            <span id="coins-display">{{$chest->attemps}}</span>
+            <input type="number" id="coins-input" value="{{$chest->attemps}}" style="display: none; width: 80px;">
+            <button id="edit-coins">✏️</button>
+            <button id="save-coins" style="display: none;">💾</button>
+        </li>
         <li>Победителей - {{$chest->wins}}</li>
     </ul>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $("#edit-coins").click(function () {
+            $("#coins-display").hide();
+            $("#coins-input").show();
+            $("#edit-coins").hide();
+            $("#save-coins").show();
+        });
+
+        $("#save-coins").click(function () {
+            let newCoins = $("#coins-input").val();
+
+            $.ajax({
+                url: "{{ route('admin.chest.update') }}",
+                method: "POST",
+                data: { attemps: newCoins, _token: "{{ csrf_token() }}" },
+                success: function (response) {
+                    $("#coins-display").text(newCoins).show();
+                    $("#coins-input").hide();
+                    $("#edit-coins").show();
+                    $("#save-coins").hide();
+                }
+            });
+        });
+    });
+</script>
 <hr>
 <div class=" container-md">
     <h2>Призовые ссылки</h2>

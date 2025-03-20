@@ -46,4 +46,10 @@ class AdminController extends Controller
         $config = Configuration::where('key', $key)->first();
         return $config ? $config->value : null;
     }
+
+    function updateChest(Request $request)
+    {
+        DB::table('chest')->where('id', 1)->update(['attemps' => $request->attemps]);
+        return response()->json(['success' => true]);
+    }
 }

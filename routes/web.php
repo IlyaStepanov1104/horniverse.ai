@@ -43,6 +43,7 @@ Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admi
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin/config', [AdminController::class, 'showConfigForm'])->name('admin.config.form');
     Route::post('/admin/config', [AdminController::class, 'updateConfig'])->name('admin.config.update');
+    Route::post('/admin/update-chest', [AdminController::class, 'updateChest'])->name('admin.chest.update');
 });
 
 

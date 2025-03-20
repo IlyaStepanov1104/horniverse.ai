@@ -87,6 +87,7 @@
         document.execCommand('copy');
         tempTextarea.remove();
         alert('Значение скопировано в буфер обмена!');
+        return false;
     }
 
     function sendTelegram() {
@@ -96,7 +97,7 @@
             setTimeout(() => {
                 $('.tg-input').css('border-color', '#08262a');
             }, 2000);
-            return;
+            return false;
         }
         $.ajax({
             url: '/game/send_telegram',
@@ -106,6 +107,7 @@
                 alert('Telegram username accepted. You will be contacted within 24 hours.');
             }
         });
+        return false;
     }
 </script>
 <section id="game" style="background-image: url(/game/images/game/environment/forest/Bg.png)">
