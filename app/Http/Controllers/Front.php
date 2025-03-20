@@ -357,6 +357,7 @@ class Front extends Controller
                     "presence_penalty" => 0.8,
                     // "stop" => ["11."],
                 ]);
+            logger()->info($dataHelp);
             $help = $dataHelp['choices'][0]['message']['content'];
         }
         $texts = array(

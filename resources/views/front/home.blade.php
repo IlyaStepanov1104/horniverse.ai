@@ -159,11 +159,6 @@
 
 
                 <div class="bottom">
-                    <p>
-                        @if (Auth::check())
-                            Your balance: {{ Auth::user()->attemps }}
-                        @endif
-                    </p>
                     <div class="col" id="choices">
                         <button class="btn action" data-choice="0" onmouseup="choice('0')">Yes, I'm ready!</button>
                         <button class="btn action" data-choice="0" onmouseup="choice('0')">I'll try... I'm afraid of
