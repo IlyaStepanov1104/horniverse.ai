@@ -100,9 +100,9 @@
         });
     }
 </script>
-    <section id="game" style="background-image: url(/game/images/game/environment/forest/Bg.png)">
-        <div class="game-container">
-            @if ($canPlay)
+<section id="game" style="background-image: url(/game/images/game/environment/forest/Bg.png)">
+    <div class="game-container">
+        @if ($canPlay)
             <div class="popup popup-1" style="display: none;">
                 <div class="flex">
                     <h3 style="display: none; color: white">Successfully! You have been given a free game!</h3>
@@ -125,15 +125,15 @@
                     <button class="btn action" onclick="closePopup2()">Close</button>
                 </div>
             </div>
-                <div class="cutscences" style="transition: opacity 2s ease-in-out;">
-                    <form class="flex js-win-form" style="display: none;">
-                        <h3 style="color: white">Your prize code:</h3>
-                        <input class="action code-input" placeholder="Loading code..." disabled/>
-                        <input class="action tg-input" placeholder="Enter your telegram @username"
-                               name="telegram_username"/>
-                        <button class="btn action" onclick="copyCode()">Copy prize code</button>
-                        <button class="btn action" onclick="sendTelegram()">Confirm</button>
-                    </form>
+            <div class="cutscences" style="transition: opacity 2s ease-in-out;">
+                <form class="flex js-win-form" style="display: none;">
+                    <h3 style="color: white">Your prize code:</h3>
+                    <input class="action code-input" placeholder="Loading code..." disabled/>
+                    <input class="action tg-input" placeholder="Enter your telegram @username"
+                           name="telegram_username"/>
+                    <button class="btn action" onclick="copyCode()">Copy prize code</button>
+                    <button class="btn action" onclick="sendTelegram()">Confirm</button>
+                </form>
                 <a href="../" class="btn action to-site" style="display: none;">Go back to
                     site</a>
                 <a href="#" class="btn action free-game" style="
@@ -187,14 +187,15 @@
                     </div>
                 </div>
             </div>
-            @else
-                <div style="color: white; display: flex; justify-content: center; align-items: center; text-align: center; height: 100%; flex-direction: column; gap: 30px;">
-                    <h2>{{$message}}</h2>
-                    <a href="../" class="btn action">Back to site</a>
-                </div>
-            @endif
-        </div>
-    </section>
+        @else
+            <div
+                style="color: white; display: flex; justify-content: center; align-items: center; text-align: center; height: 100%; flex-direction: column; gap: 30px;">
+                <h2>{{$message}}</h2>
+                <a href="../" class="btn action">Back to site</a>
+            </div>
+        @endif
+    </div>
+</section>
 <style>
 
 </style>
@@ -228,7 +229,7 @@
                 $(this).prop('disabled', true);
                 $('.skip').hide();
                 setTimeout(() => {
-                    $(this).text('Start the game ({{Auth::user()->attemps}} attempts)');
+                    $(this).text('Start the game ({{Auth::user()->attemps ? Auth::user()->attemps - 1 : 0}} attempts)');
                     $(this).prop('disabled', false);
                 }, 3000);
             }
@@ -401,7 +402,7 @@
                         $('.cutscences #intro').hide();
                         $('.cutscences #win').show();
                         $('.cutscences #win')[0].play();
-                        $('.btn.start').addClass('end-hide-button').show().attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps}} attempts)').addClass('restart');
+                        $('.btn.start').addClass('end-hide-button').show().attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps ? Auth::user()->attemps - 1 : 0}} attempts)').addClass('restart');
                         $('.buy').addClass('end-hide-button').show();
                         $('.btn.to-site').addClass('end-hide-button').show();
                         $('.btn.free-game').addClass('end-hide-button').show();
@@ -432,7 +433,7 @@
                             $('.cutscences #loose-2').show();
                             $('.cutscences #loose-2')[0].play();
                         }
-                        $('.btn.start').addClass('end-hide-button').show().attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps}} attempts)').addClass('restart');
+                        $('.btn.start').addClass('end-hide-button').show().attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps ? Auth::user()->attemps - 1 : 0}} attempts)').addClass('restart');
                         $('.buy').addClass('end-hide-button').show();
                         $('.btn.to-site').addClass('end-hide-button').show();
                         $('.btn.free-game').addClass('end-hide-button').show();
