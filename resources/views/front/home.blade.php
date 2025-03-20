@@ -201,8 +201,57 @@
             <div
                 style="color: white; display: flex; justify-content: center; align-items: center; text-align: center; height: 100%; flex-direction: column; gap: 30px;">
                 <h2 style="white-space: pre-wrap">{{$message}}</h2>
+                <div id="timer" style="font-size: 24px; font-weight: bold;"></div>
                 <a href="../" class="btn action">Back to site</a>
             </div>
+
+            <script>
+                $(document).ready(function () {
+                    // Получаем значение таймера из PHP
+                    let timerString = "{{ $timer }}"; // формат "H:i:s"
+
+                    // Преобразуем строку в массив [час, минуты, секунды]
+                    let timeArray = timerString.split(':');
+                    let hours = parseInt(timeArray[0]);
+                    let minutes = parseInt(timeArray[1]);
+                    let seconds = parseInt(timeArray[2]);
+
+                    // Функция для обновления времени
+                    function updateTimer() {
+                        if (seconds === 0) {
+                            if (minutes === 0) {
+                                if (hours === 0) {
+                                    clearInterval(timerInterval);
+                                    // Время закончилось, обновляем или что-то другое
+                                    $("#timer").text("Время вышло!");
+                                } else {
+                                    hours--;
+                                    minutes = 59;
+                                    seconds = 59;
+                                }
+                            } else {
+                                minutes--;
+                                seconds = 59;
+                            }
+                        } else {
+                            seconds--;
+                        }
+
+                        // Отображаем оставшееся время
+                        let formattedTime = String(hours).padStart(2, '0') + ':' +
+                            String(minutes).padStart(2, '0') + ':' +
+                            String(seconds).padStart(2, '0');
+                        $("#timer").text(formattedTime);
+                    }
+
+                    // Обновляем таймер каждую секунду
+                    let timerInterval = setInterval(updateTimer, 1000);
+
+                    // Изначально запускаем обновление
+                    updateTimer();
+                });
+            </script>
+
         @endif
     </div>
 </section>

@@ -262,6 +262,7 @@ class Front extends Controller
 
         $now = Carbon::now();
         $yesterday = $now->subDay();
+        $timer = $user->time_to_next_reset;
         $prizeCount = Prize::where('user_id', $user->id)
             ->where('received_at', '>=', $yesterday)
             ->count();
@@ -271,7 +272,7 @@ class Front extends Controller
             $canPlay = false;
         }
 
-        return view('front.home', compact('chest', 'wins', 'canPlay', 'message'));
+        return view('front.home', compact('chest', 'wins', 'canPlay', 'message', 'timer'));
     }
 
     function chatGPT()
