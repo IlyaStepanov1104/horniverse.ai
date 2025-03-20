@@ -91,12 +91,20 @@
 
     function sendTelegram() {
         const val = $('.tg-input').val();
+        if (!val) {
+            $('.tg-input').css('border-color', 'red');
+            setTimeout(() => {
+                $('.tg-input').css('border-color', '#08262a');
+            }, 2000);
+            return;
+        }
         $.ajax({
             url: '/game/send_telegram',
             method: 'POST',
             data: {telegram_username: val},
-        }).then((data) => {
-            console.log(data)
+            success: () => {
+                alert('Telegram username accepted. You will be contacted within 24 hours.');
+            }
         });
     }
 </script>
