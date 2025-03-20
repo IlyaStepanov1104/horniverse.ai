@@ -5,6 +5,7 @@ use App\Models\Prize;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Configuration;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -21,7 +22,8 @@ class AdminController extends Controller
         $prizes = Prize::with('user')
             ->where('created_at', '>=', Carbon::now()->subDays(2))
             ->get();
-        return view('admin.config', compact('configurations', 'prizes'));
+        $chest = DB::table('chest')->where('id', 1)->first();
+        return view('admin.config', compact('configurations', 'prizes', 'chest'));
     }
 
     public function updateConfig(Request $request)
