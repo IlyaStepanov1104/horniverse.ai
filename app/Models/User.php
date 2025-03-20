@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Controllers\AdminController;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -99,5 +100,21 @@ class User extends Authenticatable
         } else {
             return 1;
         }
+    }
+
+    public function getTimeToNextResetAttribute()
+    {
+        $now = Carbon::now();
+        $midnight = Carbon::tomorrow()->startOfDay(); // 00:00:00 следующего дня
+        $noon = Carbon::today()->setHour(12)->setMinute(0)->setSecond(0); // Сегодня в 12:00:00
+
+        if ($now->greaterThanOrEqualTo($noon)) {
+            $noon = $noon->addDay(); // Если уже прошло 12:00, берем следующее
+        }
+
+        $timeToMidnight = $midnight->diffInSeconds($now);
+        $timeToNoon = $noon->diffInSeconds($now);
+
+        return gmdate("H:i:s", min($timeToMidnight, $timeToNoon));
     }
 }

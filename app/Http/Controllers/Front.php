@@ -180,6 +180,7 @@ class Front extends Controller
         Auth::login($user);
         $user->balance = $user->solana_balance;
         $user->get_attemps = $user->will_get_attemps;
+        $user->time_update = $user->time_to_next_reset;
 
         return $user;
     }
