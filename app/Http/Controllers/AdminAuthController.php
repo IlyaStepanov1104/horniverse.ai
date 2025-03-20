@@ -25,20 +25,6 @@ class AdminAuthController extends Controller
     // Обработка формы входа
     public function login(Request $request)
     {
-        $email = 'admin@horniverse.ai';  // Ваш email для администратора
-        $password = 'rEx/1WT+zC/34{2-p=R:';   // Пароль для администратора
-
-        // Хешируем пароль
-        $hashedPassword = Hash::make($password);
-
-        // Создаем администратора
-        $admin = User::create([
-            'email' => $email,
-            'password' => $hashedPassword,
-            'isAdmin' => '1',
-            'wallet_address' => 'admin'
-        ]);
-
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:6',
