@@ -93,9 +93,9 @@
         alert('Значение скопировано в буфер обмена!');
     }
 </script>
-@if ($canPlay)
     <section id="game" style="background-image: url(/game/images/game/environment/forest/Bg.png)">
         <div class="game-container">
+            @if ($canPlay)
             <div class="popup popup-1" style="display: none;">
                 <div class="flex">
                     <h3 style="display: none; color: white">Successfully! You have been given a free game!</h3>
@@ -189,11 +189,11 @@
                     </div>
                 </div>
             </div>
+            @else
+                {{$message}}
+            @endif
         </div>
     </section>
-@else
-{{$message}}
-@endif
 <style>
 
 </style>
