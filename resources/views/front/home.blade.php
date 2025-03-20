@@ -79,10 +79,6 @@
         $('.popup-2').hide();
     }
 
-    function closePopup3() {
-        $('.popup-3').hide();
-    }
-
     function copyCode() {
         const codeValue = $('.code-input').val();
         const tempTextarea = $('<textarea>');
@@ -91,6 +87,17 @@
         document.execCommand('copy');
         tempTextarea.remove();
         alert('Значение скопировано в буфер обмена!');
+    }
+
+    function sendTelegram() {
+        const val = $('.tg-input').val();
+        $.ajax({
+            url: '/game/send_telegram',
+            method: 'POST',
+            data: {telegram_username: val},
+        }).then((data) => {
+            console.log(data)
+        });
     }
 </script>
     <section id="game" style="background-image: url(/game/images/game/environment/forest/Bg.png)">
@@ -118,15 +125,15 @@
                     <button class="btn action" onclick="closePopup2()">Close</button>
                 </div>
             </div>
-            <div class="popup-3 popup" style="display: none; z-index: 999999;">
-                <div class="flex">
-                    <h3 style="color: white">Your code:</h3>
-                    <input class="action code-input" placeholder="Loading code..." disabled/>
-                    <button class="btn action code-button" onclick="copyCode()">Copy</button>
-                    <button class="btn action" onclick="closePopup3()">Close</button>
-                </div>
-            </div>
-            <div class="cutscences">
+                <div class="cutscences" style="transition: opacity 2s ease-in-out;">
+                    <form class="flex js-win-form" style="display: none;">
+                        <h3 style="color: white">Your prize code:</h3>
+                        <input class="action code-input" placeholder="Loading code..." disabled/>
+                        <input class="action tg-input" placeholder="Enter your telegram @username"
+                               name="telegram_username"/>
+                        <button class="btn action" onclick="copyCode()">Copy prize code</button>
+                        <button class="btn action" onclick="sendTelegram()">Confirm</button>
+                    </form>
                 <a href="../" class="btn action to-site" style="display: none;">Go back to
                     site</a>
                 <a href="#" class="btn action free-game" style="
@@ -396,13 +403,13 @@
                         $('.buy').addClass('end-button').show();
                         $('.btn.to-site').addClass('end-button').show();
                         $('.btn.free-game').addClass('end-button').show();
-                        $('.popup-3').addClass('end-button').show();
+                        $('.js-win-form').addClass('end-button').show();
                         setTimeout(() => {
                             $('.btn.start').removeClass('end-hide-button').addClass('end-show-button');
                             $('.buy').removeClass('end-hide-button').addClass('end-show-button');
                             $('.btn.to-site').removeClass('end-hide-button').addClass('end-show-button');
                             $('.btn.free-game').removeClass('end-hide-button').addClass('end-show-button');
-                            $('.popup-3').removeClass('end-hide-button').addClass('end-show-button');
+                            $('.js-win-form').removeClass('end-hide-button').addClass('end-show-button');
                         }, 3000);
                         fetch(`/game/last-prize`)
                             .then(res => res.json())
