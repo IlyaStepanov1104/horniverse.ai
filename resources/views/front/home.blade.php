@@ -404,13 +404,13 @@
                         $('.btn.to-site').addClass('end-button').show(5000);
                         $('.btn.free-game').addClass('end-button').show(5000);
                         $('.js-win-form').addClass('end-button').show(5000);
-                        setTimeout(() => {
-                            $('.btn.start').removeClass('end-hide-button').addClass('end-show-button');
-                            $('.buy').removeClass('end-hide-button').addClass('end-show-button');
-                            $('.btn.to-site').removeClass('end-hide-button').addClass('end-show-button');
-                            $('.btn.free-game').removeClass('end-hide-button').addClass('end-show-button');
-                            $('.js-win-form').removeClass('end-hide-button').addClass('end-show-button');
-                        }, 10000);
+                        // setTimeout(() => {
+                        //     $('.btn.start').removeClass('end-hide-button').addClass('end-show-button');
+                        //     $('.buy').removeClass('end-hide-button').addClass('end-show-button');
+                        //     $('.btn.to-site').removeClass('end-hide-button').addClass('end-show-button');
+                        //     $('.btn.free-game').removeClass('end-hide-button').addClass('end-show-button');
+                        //     $('.js-win-form').removeClass('end-hide-button').addClass('end-show-button');
+                        // }, 10000);
                         fetch(`/game/last-prize`)
                             .then(res => res.json())
                             .then(({lastPrize}) => {
@@ -434,12 +434,12 @@
                         $('.buy').addClass('end-button').show(5000);
                         $('.btn.to-site').addClass('end-button').show(5000);
                         $('.btn.free-game').addClass('end-button').show(5000);
-                        setTimeout(() => {
-                            $('.btn.start').removeClass('end-hide-button').addClass('end-show-button');
-                            $('.buy').removeClass('end-hide-button').addClass('end-show-button');
-                            $('.btn.to-site').removeClass('end-hide-button').addClass('end-show-button');
-                            $('.btn.free-game').removeClass('end-hide-button').addClass('end-show-button');
-                        }, 3000);
+                        // setTimeout(() => {
+                        //     $('.btn.start').removeClass('end-hide-button').addClass('end-show-button');
+                        //     $('.buy').removeClass('end-hide-button').addClass('end-show-button');
+                        //     $('.btn.to-site').removeClass('end-hide-button').addClass('end-show-button');
+                        //     $('.btn.free-game').removeClass('end-hide-button').addClass('end-show-button');
+                        // }, 3000);
                     }
                     // < Slava
 
