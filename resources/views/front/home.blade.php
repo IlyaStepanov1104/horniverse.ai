@@ -190,8 +190,9 @@
                 </div>
             </div>
             @else
-                <div style="color: white; display: flex; justify-content: center; align-items: center; text-align: center;">
+                <div style="color: white; display: flex; justify-content: center; align-items: center; text-align: center; height: 100%; flex-direction: column; gap: 30px;">
                     {{$message}}
+                    <button href="../" class="btn action">Back to site</button>
                 </div>
             @endif
         </div>
