@@ -231,6 +231,8 @@ class Front extends Controller
         DB::table('users')->where('id', $user->id)->update(['boss' => implode('', [rand(0, 2), rand(0, 5), rand(0, 2), rand(0, 2)])]);
         $chest = DB::table('chest')->first()->attemps;
         $wins = DB::table('chest')->where('id', 1)->first()->wins;
+        $message = '';
+        $canPlay =  true;
         if ($wins >= AdminController::getConfigValue('max_winners_count')) {
             $message = 'For today, all griffins have been defeated. Come back tomorrow to try again!';
             $canPlay =  false;
