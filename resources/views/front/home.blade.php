@@ -136,14 +136,14 @@
                 </div>
             </div>
             <div class="cutscences" style="transition: opacity 2s ease-in-out;">
-                <form class="flex js-win-form win-form" style="display: none;">
+                <div class="flex js-win-form win-form" style="display: none;">
                     <h3 style="color: white">Your prize code:</h3>
                     <input class="action code-input" placeholder="Loading code..." disabled/>
                     <input class="action tg-input" placeholder="Enter your telegram @username"
                            name="telegram_username"/>
                     <button class="btn action" onclick="copyCode()">Copy prize code</button>
                     <button class="btn action" onclick="sendTelegram()">Confirm</button>
-                </form>
+                </div>
                 <a href="../" class="btn action to-site" style="display: none;">Go back to
                     site</a>
                 <a href="#" class="btn action free-game" style="
