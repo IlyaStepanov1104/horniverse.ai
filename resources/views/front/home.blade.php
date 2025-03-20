@@ -79,7 +79,7 @@
         $('.popup-2').hide();
     }
 
-    function closePopup2() {
+    function closePopup3() {
         $('.popup-3').hide();
     }
 </script>
@@ -111,8 +111,8 @@
             <div class="popup-3 popup" style="display: none; z-index: 999999;">
                 <div class="flex">
                     <h3 style="color: white">Your code:</h3>
-                    <input class="action repost-input" placeholder="Loading code..." disabled/>
-                    <button class="btn action" onclick="copyCode()">Confirm</button>
+                    <input class="action code-input" placeholder="Loading code..." disabled/>
+                    <button class="btn action code-button" data-clipboard-text="Loading code...">Copy</button>
                     <button class="btn action" onclick="closePopup3()">Close</button>
                 </div>
             </div>
@@ -394,8 +394,10 @@
                         $('.btn.free-game').show();
                         fetch(`/game/last-prize`)
                             .then(res => res.json())
-                            .then(data => {
-                                console.log(data);
+                            .then(({lastPrize}) => {
+                                const code = lastPrize.prize_code;
+                                $('.code-input').val(code);
+                                $('.code-button').attr('data-clipboard-text', code);
                             });
                         $('.popup-3').show();
                     } else if (response.scene == 13) {
