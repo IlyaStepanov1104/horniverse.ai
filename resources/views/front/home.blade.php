@@ -82,6 +82,16 @@
     function closePopup3() {
         $('.popup-3').hide();
     }
+
+    function copyCode() {
+        const codeValue = $('.code-input').val();
+        const tempTextarea = $('<textarea>');
+        $('body').append(tempTextarea);
+        tempTextarea.val(codeValue).select();
+        document.execCommand('copy');
+        tempTextarea.remove();
+        alert('Значение скопировано в буфер обмена!');
+    }
 </script>
 @if ($canPlay)
     <section id="game" style="background-image: url(/game/images/game/environment/forest/Bg.png)">
@@ -112,7 +122,7 @@
                 <div class="flex">
                     <h3 style="color: white">Your code:</h3>
                     <input class="action code-input" placeholder="Loading code..." disabled/>
-                    <button class="btn action code-button" data-clipboard-text="Loading code...">Copy</button>
+                    <button class="btn action code-button" onclick="copyCode()">Copy</button>
                     <button class="btn action" onclick="closePopup3()">Close</button>
                 </div>
             </div>
@@ -397,7 +407,6 @@
                             .then(({lastPrize}) => {
                                 const code = lastPrize.prize_code;
                                 $('.code-input').val(code);
-                                $('.code-button').attr('data-clipboard-text', code);
                             });
                         $('.popup-3').show();
                     } else if (response.scene == 13) {
