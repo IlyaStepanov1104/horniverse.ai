@@ -399,18 +399,18 @@
                         $('.cutscences #intro').hide();
                         $('.cutscences #win').show();
                         $('.cutscences #win')[0].play();
-                        $('.btn.start').addClass('end-hide-button').show(5000).attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps}} attempts)').addClass('restart');
-                        $('.buy').addClass('end-hide-button').show(5000);
-                        $('.btn.to-site').addClass('end-hide-button').show(5000);
-                        $('.btn.free-game').addClass('end-hide-button').show(5000);
-                        $('.js-win-form').addClass('end-hide-button').show(5000);
-                        // setTimeout(() => {
-                        //     $('.btn.start').removeClass('end-hide-button').addClass('end-show-button');
-                        //     $('.buy').removeClass('end-hide-button').addClass('end-show-button');
-                        //     $('.btn.to-site').removeClass('end-hide-button').addClass('end-show-button');
-                        //     $('.btn.free-game').removeClass('end-hide-button').addClass('end-show-button');
-                        //     $('.js-win-form').removeClass('end-hide-button').addClass('end-show-button');
-                        // }, 10000);
+                        $('.btn.start').addClass('end-hide-button').show().attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps}} attempts)').addClass('restart');
+                        $('.buy').addClass('end-hide-button').show();
+                        $('.btn.to-site').addClass('end-hide-button').show();
+                        $('.btn.free-game').addClass('end-hide-button').show();
+                        $('.js-win-form').addClass('end-hide-button').show();
+                        setTimeout(() => {
+                            $('.btn.start').removeClass('end-hide-button').addClass('end-show-button');
+                            $('.buy').removeClass('end-hide-button').addClass('end-show-button');
+                            $('.btn.to-site').removeClass('end-hide-button').addClass('end-show-button');
+                            $('.btn.free-game').removeClass('end-hide-button').addClass('end-show-button');
+                            $('.js-win-form').removeClass('end-hide-button').addClass('end-show-button');
+                        }, 5000);
                         fetch(`/game/last-prize`)
                             .then(res => res.json())
                             .then(({lastPrize}) => {
@@ -430,16 +430,16 @@
                             $('.cutscences #loose-2').show();
                             $('.cutscences #loose-2')[0].play();
                         }
-                        $('.btn.start').addClass('end-hide-button').show(5000).attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps}} attempts)').addClass('restart');
-                        $('.buy').addClass('end-hide-button').show(5000);
-                        $('.btn.to-site').addClass('end-hide-button').show(5000);
-                        $('.btn.free-game').addClass('end-hide-button').show(5000);
-                        // setTimeout(() => {
-                        //     $('.btn.start').removeClass('end-hide-button').addClass('end-show-button');
-                        //     $('.buy').removeClass('end-hide-button').addClass('end-show-button');
-                        //     $('.btn.to-site').removeClass('end-hide-button').addClass('end-show-button');
-                        //     $('.btn.free-game').removeClass('end-hide-button').addClass('end-show-button');
-                        // }, 3000);
+                        $('.btn.start').addClass('end-hide-button').show().attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps}} attempts)').addClass('restart');
+                        $('.buy').addClass('end-hide-button').show();
+                        $('.btn.to-site').addClass('end-hide-button').show();
+                        $('.btn.free-game').addClass('end-hide-button').show();
+                        setTimeout(() => {
+                            $('.btn.start').removeClass('end-hide-button').addClass('end-show-button');
+                            $('.buy').removeClass('end-hide-button').addClass('end-show-button');
+                            $('.btn.to-site').removeClass('end-hide-button').addClass('end-show-button');
+                            $('.btn.free-game').removeClass('end-hide-button').addClass('end-show-button');
+                        }, 5000);
                     }
                     // < Slava
 
