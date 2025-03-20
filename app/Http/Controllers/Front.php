@@ -124,6 +124,7 @@ class Front extends Controller
         $user->subscribed = true;
         $user->attemps += 1;
         $user->save();
+        return response()->json(['type' => 'subscribe']);
     }
 
     public function storeLink()
@@ -133,6 +134,7 @@ class Front extends Controller
         $user->reposted = true;
         $user->attemps += 1;
         $user->save();
+        return response()->json(['type' => 'repost']);
     }
 
     function walletLogin(Request $request)
