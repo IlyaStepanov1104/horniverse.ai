@@ -142,7 +142,7 @@
                     bottom: calc(180px - calc(65 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width)));
                     z-index: 10;
                 ">Get free game</a>
-                <a class="btn action start">Start the game ({{Auth::user()->attemps}}&nbsp;attempts)</a>
+                <a class="btn action start">Start the game ({{Auth::user()->attemps}} attempts)</a>
                 <a class="btn action buy" href="/wallet">Get more attempts</a>
                 <video id="intro" src="/game/images/game/cutscenes/Intro.mp4" style="display: none;"></video>
                 <video id="win" src="/game/images/game/cutscenes/Win.mp4" style="display: none;"></video>
@@ -229,7 +229,7 @@
                 $(this).prop('disabled', true);
                 $('.skip').hide();
                 setTimeout(() => {
-                    $(this).text('Start the game ({{Auth::user()->attemps ? Auth::user()->attemps - 1 : 0}}&nbsp;attempts)');
+                    $(this).text('Start the game ({{Auth::user()->attemps ? Auth::user()->attemps - 1 : 0}} attempts)');
                     $(this).prop('disabled', false);
                 }, 3000);
             }
@@ -402,7 +402,7 @@
                         $('.cutscences #intro').hide();
                         $('.cutscences #win').show();
                         $('.cutscences #win')[0].play();
-                        $('.btn.start').addClass('end-hide-button').show().attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps ? Auth::user()->attemps - 1 : 0}}&nbsp;attempts)').addClass('restart');
+                        $('.btn.start').addClass('end-hide-button').show().attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps ? Auth::user()->attemps - 1 : 0}} attempts)').addClass('restart');
                         $('.buy').addClass('end-hide-button').show();
                         $('.btn.to-site').addClass('end-hide-button').show();
                         $('.btn.free-game').addClass('end-hide-button').show();
@@ -433,7 +433,7 @@
                             $('.cutscences #loose-2').show();
                             $('.cutscences #loose-2')[0].play();
                         }
-                        $('.btn.start').addClass('end-hide-button').show().attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps ? Auth::user()->attemps - 1 : 0}}&nbsp;attempts)').addClass('restart');
+                        $('.btn.start').addClass('end-hide-button').show().attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps ? Auth::user()->attemps - 1 : 0}} attempts)').addClass('restart');
                         $('.buy').addClass('end-hide-button').show();
                         $('.btn.to-site').addClass('end-hide-button').show();
                         $('.btn.free-game').addClass('end-hide-button').show();
