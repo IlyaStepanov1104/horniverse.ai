@@ -131,7 +131,7 @@ class Front extends Controller
     {
         $user = Auth::user();
         if ($user->reposted) return response()->json(['type' => 'error'], 400);
-        $user->reposted = true;
+        $user->reposted = 1;
         $user->attemps += 1;
         $user->save();
         return response()->json(['type' => 'repost']);

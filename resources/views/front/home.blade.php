@@ -19,66 +19,6 @@
 </head>
 <body>
 <script>
-    function subscribe() {
-        $('.tg').prop('disabled', true);
-        $('.twitter').prop('disabled', true);
-        $.ajax({
-            url: '/game/subscribe',
-            method: 'POST',
-            success: () => {
-                $('.popup h3').text('Successfully! You have been given a free game!');
-                $('.popup h3').show();
-                $('.tg').hide();
-                $('.twitter').hide();
-                setTimeout(() => {
-                    $('.tg').prop('disabled', false);
-                    $('.twitter').prop('disabled', false);
-                    window.location.reload();
-                }, 3000);
-            }
-        });
-        window.open('https://t.me/HorniverseAI', '_blank').focus();
-    }
-
-    function repost() {
-        $('.popup-2').show();
-        window.open('https://x.com/HorniverseAI', '_blank').focus();
-    }
-
-    function confirmRepost() {
-        const url = $('.repost-input').val();
-
-        $.ajax({
-            url: '/game/repost',
-            method: 'POST',
-            data: {url},
-            success: () => {
-                $('.popup h3').text('Successfully! You have been given a free game!');
-                $('.popup h3').show();
-                $('.tg').hide();
-                $('.twitter').hide();
-                setTimeout(() => {
-                    window.location.reload();
-                }, 3000);
-            },
-            error: () => {
-                $('.popup h3').text('Error! Try to make a new repost and attach a link to it!');
-                $('.popup h3').show();
-            }
-        });
-    }
-
-    function closePopup() {
-        $('.popup-1').hide();
-        $('.tg').show();
-        $('.twitter').show();
-        $('.popup h3').hide();
-    }
-
-    function closePopup2() {
-        $('.popup-2').hide();
-    }
-
     function copyCode() {
         const codeValue = $('.code-input').val();
         const tempTextarea = $('<textarea>');
@@ -113,28 +53,6 @@
 <section id="game" style="background-image: url(/game/images/game/environment/forest/Bg.png)">
     <div class="game-container">
         @if ($canPlay)
-            <div class="popup popup-1" style="display: none;">
-                <div class="flex">
-                    <h3 style="display: none; color: white">Successfully! You have been given a free game!</h3>
-                    <button class="btn action twitter" onclick="repost()">
-                        Repost from X
-                    </button>
-                    @if (!Auth::user()->subscribed)
-                        <button class="btn action tg" onclick="subscribe()">
-                            Subscribe to Telegram
-                        </button>
-                    @endif
-                    <button class="btn action" onclick="closePopup()">Close</button>
-                </div>
-            </div>
-            <div class="popup-2 popup" style="display: none; z-index: 999999;">
-                <div class="flex">
-                    <h3 style="color: white">Paste the link to the repost:</h3>
-                    <input class="action repost-input" placeholder="Repost from X"/>
-                    <button class="btn action" onclick="confirmRepost()">Confirm</button>
-                    <button class="btn action" onclick="closePopup2()">Close</button>
-                </div>
-            </div>
             <div class="cutscences" style="transition: opacity 2s ease-in-out;">
                 <div class="flex js-win-form win-form" style="display: none;">
                     <h3 style="color: white">Your prize code:</h3>
@@ -146,12 +64,6 @@
                 </div>
                 <a href="../" class="btn action to-site" style="display: none;">Go back to
                     site</a>
-                <a href="#" class="btn action free-game" style="
-                    display: none;
-                    position: absolute;
-                    bottom: calc(180px - calc(65 * clamp(350px, 100vw, 500px) / var(--ideal-viewport-width)));
-                    z-index: 10;
-                ">Get free game</a>
                 <a class="btn action start">Start the game ({{Auth::user()->attemps}} attempts)</a>
                 <a class="btn action buy" href="/wallet">Get more attempts</a>
                 <video id="intro" src="/game/images/game/cutscenes/Intro.mp4" style="display: none;"></video>
@@ -274,10 +186,6 @@
 </body>
 <script>
     let interval;
-
-    $('.free-game').click(() => {
-        $('.popup-1').show();
-    });
 
     $('.start').click(function () {
         $.ajax({
@@ -476,13 +384,11 @@
                         $('.btn.start').addClass('end-hide-button').show().attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps ? Auth::user()->attemps - 1 : 0}} attempts)').addClass('restart');
                         $('.buy').addClass('end-hide-button').show();
                         $('.btn.to-site').addClass('end-hide-button').show();
-                        $('.btn.free-game').addClass('end-hide-button').show();
                         $('.js-win-form').addClass('end-hide-button').show();
                         setTimeout(() => {
                             $('.btn.start').removeClass('end-hide-button').addClass('end-show-button');
                             $('.buy').removeClass('end-hide-button').addClass('end-show-button');
                             $('.btn.to-site').removeClass('end-hide-button').addClass('end-show-button');
-                            $('.btn.free-game').removeClass('end-hide-button').addClass('end-show-button');
                             $('.js-win-form').removeClass('end-hide-button').addClass('end-show-button');
                         }, 5000);
                         fetch(`/game/last-prize`)
@@ -507,12 +413,10 @@
                         $('.btn.start').addClass('end-hide-button').show().attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps ? Auth::user()->attemps - 1 : 0}} attempts)').addClass('restart');
                         $('.buy').addClass('end-hide-button').show();
                         $('.btn.to-site').addClass('end-hide-button').show();
-                        $('.btn.free-game').addClass('end-hide-button').show();
                         setTimeout(() => {
                             $('.btn.start').removeClass('end-hide-button').addClass('end-show-button');
                             $('.buy').removeClass('end-hide-button').addClass('end-show-button');
                             $('.btn.to-site').removeClass('end-hide-button').addClass('end-show-button');
-                            $('.btn.free-game').removeClass('end-hide-button').addClass('end-show-button');
                         }, 5000);
                     }
                     // < Slava
