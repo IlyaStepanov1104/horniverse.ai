@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Configuration;
 use App\Models\Prize;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,6 +23,11 @@ class Front extends Controller
 {
     // То же что и type script только все переменные не нужно заранее объявлять и они обозначаются значком доллара $ а методы вызываются через стрелочку
 
+    public function getConfigValueCallback($request): string | null
+    {
+        $config = Configuration::where('key', $request->input('key'))->first();
+        return $config ? $config->value : null;
+    }
 
     public function generatePrize()
     {

@@ -39,10 +39,4 @@ class AdminController extends Controller
         $config = Configuration::where('key', $key)->first();
         return $config ? $config->value : null;
     }
-
-    public function getConfigValueCallback($request): string | null
-    {
-        $config = Configuration::where('key', $request->input('key'))->first();
-        return $config ? $config->value : null;
-    }
 }
