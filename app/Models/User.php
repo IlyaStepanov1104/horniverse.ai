@@ -69,7 +69,7 @@ class User extends Authenticatable
 
         // Переменная для количества попыток
         $attempts = 0;
-        $maxAttempts = 3;
+        $maxAttempts = 30;
         $delay = 5 + random_int(0, 5); // Задержка между попытками в секундах
 
         while ($attempts < $maxAttempts) {
@@ -100,7 +100,7 @@ class User extends Authenticatable
         }
 
         // Если не удалось получить данные после нескольких попыток
-        return "Ошибка: не удалось получить баланс после {$maxAttempts} попыток.";
+        return 0;
     }
 
 
