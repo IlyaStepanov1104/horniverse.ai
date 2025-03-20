@@ -192,7 +192,7 @@
         </div>
     </section>
 @else
-    {$message}
+{{$message}}
 @endif
 <style>
 
