@@ -120,7 +120,7 @@ class Front extends Controller
     public function subscribe()
     {
         $user = Auth::user();
-        if ($user->subscribe) return;
+        if ($user->subscribe) return response()->json(['type' => 'error'], 400);
         $user->subscribed = true;
         $user->attemps += 1;
         $user->save();
@@ -130,7 +130,7 @@ class Front extends Controller
     public function storeLink()
     {
         $user = Auth::user();
-        if ($user->reposted) return;
+        if ($user->reposted) return response()->json(['type' => 'error'], 400);
         $user->reposted = true;
         $user->attemps += 1;
         $user->save();
