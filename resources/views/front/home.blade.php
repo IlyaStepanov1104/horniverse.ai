@@ -202,8 +202,8 @@
                 style="color: white; display: flex; justify-content: center; align-items: center; text-align: center; height: 100%; flex-direction: column; gap: 30px;">
                 <h2 style="white-space: pre-wrap">{{$message}}</h2>
                 <div>
-                    <h3>Come back to try in:</h3>
-                    <div id="timer" style="font-size: 24px; font-weight: bold; color: #EF4A82;"></div>
+                    <h3 style="font-size: 30px">Come back to try in:</h3>
+                    <div id="timer" style="font-size: 40px; font-weight: bold; color: #EF4A82;"></div>
                 </div>
                 <a href="../" class="btn action">Back to site</a>
             </div>
