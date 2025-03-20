@@ -26,7 +26,7 @@ class Front extends Controller
     public function getConfigValueCallback(Request $request)
     {
         $key = $request->input('key');
-        return AdminController::getConfigValue($key);
+        return response()-> json(['value' => AdminController::getConfigValue($key)]);
     }
 
     public function generatePrize()
