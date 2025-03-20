@@ -41,6 +41,14 @@
 </div>
 <hr>
 <div class="container">
+    <h2>Сундук</h2>
+    <ul>
+        <li>Количество монет - {{$chest->attemps}}</li>
+        <li>Победителей - {{$chest->wins}}</li>
+    </ul>
+</div>
+<hr>
+<div class="container">
     <h2>Призовые ссылки</h2>
     <table class="table table-striped">
         <thead>

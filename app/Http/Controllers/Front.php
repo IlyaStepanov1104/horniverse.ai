@@ -23,6 +23,19 @@ class Front extends Controller
 {
     // То же что и type script только все переменные не нужно заранее объявлять и они обозначаются значком доллара $ а методы вызываются через стрелочку
 
+    public function getLeaderboard()
+    {
+        $topPlayers = DB::table('users')
+            ->select('users.wallet_address', DB::raw('COUNT(prizes.id) as wins'))
+            ->leftJoin('prizes', 'users.id', '=', 'prizes.user_id')
+            ->groupBy('users.wallet_address')
+            ->orderByDesc('wins')
+            ->limit(10)
+            ->get();
+
+        return response()->json($topPlayers, 200);
+    }
+
     public function getConfigValueCallback(Request $request)
     {
         $key = $request->input('key');
@@ -82,6 +95,9 @@ class Front extends Controller
         }
 
         $user->attemps -= 1;
+
+        DB::table('chest')->where('id', 1)->increment('attemps');
+
         $user->save();
 
         return response()->json(['type' => 'started']);

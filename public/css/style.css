@@ -469,5 +469,5 @@ div {
 
 .win-form .btn.action {
     margin: 0;
-    width: 100%;
+    width: 100% !important;
 }
