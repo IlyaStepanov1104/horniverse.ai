@@ -231,7 +231,10 @@ class Front extends Controller
     {
         $token = $request->input('token');
 
-        $user = User::firstOrCreate(['token' => $token]);
+        $user = User::where('token', $token)->first();
+        if (!$user) {
+            return response()->json(['error' => 'Not found'], 404);
+        }
         Auth::login($user);
         $user->balance = $user->solana_balance;
         $user->get_attemps = $user->will_get_attemps;
