@@ -190,7 +190,9 @@
                 </div>
             </div>
             @else
-                {{$message}}
+                <div style="color: white; display: flex; justify-content: center; align-items: center; text-align: center;">
+                    {{$message}}
+                </div>
             @endif
         </div>
     </section>
