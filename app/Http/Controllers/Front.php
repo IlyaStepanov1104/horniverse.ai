@@ -625,7 +625,7 @@ class Front extends Controller
         }
         if ($scene == 12) {
             $wins = DB::table('chest')->where('id', 1)->first()->wins;
-            if ($boss == $combination && $wins < AdminController::getConfigValue('max_winners_count')) {
+//            if ($boss == $combination && $wins < AdminController::getConfigValue('max_winners_count')) {
                 $acces = true;
                 DB::table('users')->where('id', $user->id)->update(['win' => now()]);
                 DB::table('chest')->where('id', 1)->increment('wins');
@@ -638,9 +638,9 @@ class Front extends Controller
 
                 $this->generatePrize($user);
                 // $scene = 0;
-            } else {
-                $acces = false;
-            }
+//            } else {
+//                $acces = false;
+//            }
         }
 
         if ($acces != true) {
