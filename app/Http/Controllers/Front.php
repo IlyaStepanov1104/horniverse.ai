@@ -333,11 +333,10 @@ class Front extends Controller
         $help = '';
         $boss = implode('', [rand(0, 2), rand(0, 5), rand(0, 2), rand(0, 2)]);
         if ($scene == 2) {
-            DB::table('users')->where('id', $user->id)->update(['scene' => 0]);
             DB::table('users')->where('id', $user->id)->update(['magic' => '']);
             DB::table('users')->where('id', $user->id)->update(['weapons' => '']);
             DB::table('users')->where('id', $user->id)->update(['combination' => '']);
-            DB::table('users')->where('id', $user->id)->update(['boss' => implode('', [rand(0, 2), rand(0, 5), rand(0, 2), rand(0, 2)])]);
+            DB::table('users')->where('id', $user->id)->update(['boss' => $boss]);
 
             $bossStates = substr($boss, 0, 3);
             $bossStatesArr = array(
@@ -629,7 +628,7 @@ class Front extends Controller
             if ($boss == $combination && $wins < AdminController::getConfigValue('max_winners_count')) {
                 $acces = true;
                 DB::table('users')->where('id', $user->id)->update(['win' => now()]);
-                DB::table('chest')->where('id', 1)->increment('wins', 1);
+                DB::table('chest')->where('id', 1)->increment('wins');
 
 //                DB::table('users')->where('id', $user->id)->update(['scene' => 0]);
 //                DB::table('users')->where('id', $user->id)->update(['magic' => '']);
