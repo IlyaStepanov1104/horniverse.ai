@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Prize;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Configuration;
 
@@ -17,7 +18,9 @@ class AdminController extends Controller
     {
         // Получаем все конфигурационные параметры
         $configurations = Configuration::all();
-        $prizes = Prize::with('user')->get();
+        $prizes = Prize::with('user')
+            ->where('created_at', '>=', Carbon::now()->subDays(2))
+            ->get();
         return view('admin.config', compact('configurations', 'prizes'));
     }
 

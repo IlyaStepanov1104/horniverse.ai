@@ -135,8 +135,8 @@
                     bottom: 100px;
                     z-index: 10;
                 ">Get free game</a>
-                <a class="btn action start">Start the game ({{Auth::user()->attemps}} attemps)</a>
-                <a class="btn action buy" href="/wallet/balance">Buy attemps</a>
+                <a class="btn action start">Start the game ({{Auth::user()->attemps}} attempts)</a>
+                <a class="btn action buy" href="/wallet">Get more attempts</a>
                 <video id="intro" src="/game/images/game/cutscenes/Intro.mp4" style="display: none;"></video>
                 <video id="win" src="/game/images/game/cutscenes/Win.mp4" style="display: none;"></video>
                 <video id="loose" src="/game/images/game/cutscenes/Loose.mp4" style="display: none;"></video>
@@ -183,7 +183,7 @@
             @else
                 <div style="color: white; display: flex; justify-content: center; align-items: center; text-align: center; height: 100%; flex-direction: column; gap: 30px;">
                     <h2>{{$message}}</h2>
-                    <button href="../" class="btn action">Back to site</button>
+                    <a href="../" class="btn action">Back to site</a>
                 </div>
             @endif
         </div>
@@ -216,11 +216,11 @@
                 $('.buy').fadeOut(1000);
             },
             error: () => {
-                $(this).text('Error: Not enough attemps');
+                $(this).text('Error: Not enough attempts');
                 $(this).prop('disabled', true);
                 $('.skip').hide();
                 setTimeout(() => {
-                    $(this).text('Start the game ({{Auth::user()->attemps}} attemps)');
+                    $(this).text('Start the game ({{Auth::user()->attemps}} attempts)');
                     $(this).prop('disabled', false);
                 }, 3000);
             }
@@ -392,17 +392,24 @@
                         $('.cutscences #intro').hide();
                         $('.cutscences #win').show();
                         $('.cutscences #win')[0].play();
-                        $('.btn.start').show().attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps}} attemps)').addClass('restart');
-                        $('.buy').show();
-                        $('.btn.to-site').show();
-                        $('.btn.free-game').show();
+                        $('.btn.start').addClass('end-button').show().attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps}} attempts)').addClass('restart');
+                        $('.buy').addClass('end-button').show();
+                        $('.btn.to-site').addClass('end-button').show();
+                        $('.btn.free-game').addClass('end-button').show();
+                        $('.popup-3').addClass('end-button').show();
+                        setTimeout(() => {
+                            $('.btn.start').removeClass('end-hide-button').addClass('end-show-button');
+                            $('.buy').removeClass('end-hide-button').addClass('end-show-button');
+                            $('.btn.to-site').removeClass('end-hide-button').addClass('end-show-button');
+                            $('.btn.free-game').removeClass('end-hide-button').addClass('end-show-button');
+                            $('.popup-3').removeClass('end-hide-button').addClass('end-show-button');
+                        }, 3000);
                         fetch(`/game/last-prize`)
                             .then(res => res.json())
                             .then(({lastPrize}) => {
                                 const code = lastPrize.prize_code;
                                 $('.code-input').val(code);
                             });
-                        $('.popup-3').show();
                     } else if (response.scene == 13) {
                         $('.cutscences').removeClass('hide');
                         $('.cutscences #intro').hide();
@@ -416,10 +423,16 @@
                             $('.cutscences #loose-2').show();
                             $('.cutscences #loose-2')[0].play();
                         }
-                        $('.btn.start').show().attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps}} attemps)').addClass('restart');
-                        $('.buy').show();
-                        $('.btn.to-site').show();
-                        $('.btn.free-game').show();
+                        $('.btn.start').addClass('end-button').show().attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps}} attempts)').addClass('restart');
+                        $('.buy').addClass('end-button').show();
+                        $('.btn.to-site').addClass('end-button').show();
+                        $('.btn.free-game').addClass('end-button').show();
+                        setTimeout(() => {
+                            $('.btn.start').removeClass('end-hide-button').addClass('end-show-button');
+                            $('.buy').removeClass('end-hide-button').addClass('end-show-button');
+                            $('.btn.to-site').removeClass('end-hide-button').addClass('end-show-button');
+                            $('.btn.free-game').removeClass('end-hide-button').addClass('end-show-button');
+                        }, 3000);
                     }
                     // < Slava
 

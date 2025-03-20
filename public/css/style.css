@@ -438,3 +438,15 @@ div {
 .popup input {
   padding: 10px;
 }
+
+.end-hide-button {
+    opacity: 0;
+}
+
+.end-show-button {
+    opacity: 1;
+}
+
+.btn {
+    transition: opacity 2s ease-in-out;
+}
