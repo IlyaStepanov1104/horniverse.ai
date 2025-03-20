@@ -117,29 +117,22 @@ class Front extends Controller
         $user->save();
     }
 
-    public function subscribe(Request $request)
+    public function subscribe()
     {
         $user = Auth::user();
-
+        if ($user->subscribe) return;
         $user->subscribed = true;
         $user->attemps += 1;
         $user->save();
     }
 
-    public function storeLink(Request $request)
+    public function storeLink()
     {
-        $url = $request->input('url');
-
-        if (empty($url) || ShareLink::where('link', $url)->count() || !preg_match('/^https?:\/\/(www\.)?x\.com(\/.*)?$/i', $url)) {
-            return response()->json(['status' => 'error'], 400);
-        }
-
-        $referral = ShareLink::create([
-            'user_id' => Auth::id(),
-            'link' => $url,
-        ]);
-
-        return response()->json(['status' => 'ok', 'data' => $referral], 201);
+        $user = Auth::user();
+        if ($user->reposted) return;
+        $user->reposted = true;
+        $user->attemps += 1;
+        $user->save();
     }
 
     function walletLogin(Request $request)
