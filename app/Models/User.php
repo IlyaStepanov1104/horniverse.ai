@@ -73,11 +73,10 @@ class User extends Authenticatable
 
         $data = $response->json();
 
-        if (!isset($data["result"]["value"])) {
+        if (empty($data["result"]["value"])) {
             return 0;
         }
 
         return $data["result"]["value"][0]["account"]["data"]["parsed"]["info"]["tokenAmount"]["uiAmount"];
     }
-
 }
