@@ -279,14 +279,14 @@
                 $('#player').attr('src', `/game/images/game/player/Static.gif`);
             }, ajaxDelay);
 
-            setTimeout(() => {
-                postAJAX(choiceNumber);
-                $('.layer-0').css('background-image', `url(https://horniverse.ai/game/images/game/environment/end/Layer-0-B.gif)`);
-                setTimeout(() => {
-                    postAJAX(choiceNumber);
-                    $('.layer-0').css('background-image', `url(https://horniverse.ai/game/images/game/environment/end/Layer-0.gif)`);
-                }, 720);
-            }, 200);
+            // setTimeout(() => {
+            //     postAJAX(choiceNumber);
+            //     $('.layer-0').css('background-image', `url(https://horniverse.ai/game/images/game/environment/end/Layer-0-B.gif)`);
+            //     setTimeout(() => {
+            //         postAJAX(choiceNumber);
+            //         $('.layer-0').css('background-image', `url(https://horniverse.ai/game/images/game/environment/end/Layer-0.gif)`);
+            //     }, 720);
+            // }, 200);
 
 
             // < SLAVA
