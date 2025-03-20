@@ -251,7 +251,7 @@ class Front extends Controller
             ->count();
 
         if ($prizeCount >= AdminController::getConfigValue('max_prize_count')) {
-            $message = 'You\'ve already won '.$prizeCount.' times.<br><br>All the griffons run away at the sight of you. Come back tomorrow to try again!';
+            $message = 'You\'ve already won '.$prizeCount.' times.\n\nAll the griffons run away at the sight of you. Come back tomorrow to try again!';
             $canPlay = false;
         }
 
