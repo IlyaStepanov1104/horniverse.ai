@@ -29,10 +29,8 @@ class Front extends Controller
         return response()-> json(['value' => AdminController::getConfigValue($key)]);
     }
 
-    public function generatePrize()
+    public function generatePrize($user)
     {
-        // Проверка, существует ли пользователь
-        $user = Auth::user();
         if (!$user) {
             return response()->json(['error' => 'Пользователь не найден'], 404);
         }
@@ -225,14 +223,31 @@ class Front extends Controller
         if (!Auth::check()) {
             return redirect('../wallet?redirect_url=https://horniverse.ai/game');
         }
-        DB::table('users')->where('id', Auth::user()->id)->update(['scene' => 0]);
-        DB::table('users')->where('id', Auth::user()->id)->update(['magic' => '']);
-        DB::table('users')->where('id', Auth::user()->id)->update(['weapons' => '']);
-        DB::table('users')->where('id', Auth::user()->id)->update(['combination' => '']);
-        DB::table('users')->where('id', Auth::user()->id)->update(['boss' => implode('', [rand(0, 2), rand(0, 5), rand(0, 2), rand(0, 2)])]);
+        $user = Auth::user();
+        DB::table('users')->where('id', $user->id)->update(['scene' => 0]);
+        DB::table('users')->where('id', $user->id)->update(['magic' => '']);
+        DB::table('users')->where('id', $user->id)->update(['weapons' => '']);
+        DB::table('users')->where('id', $user->id)->update(['combination' => '']);
+        DB::table('users')->where('id', $user->id)->update(['boss' => implode('', [rand(0, 2), rand(0, 5), rand(0, 2), rand(0, 2)])]);
         $chest = DB::table('chest')->first()->attemps;
         $wins = DB::table('chest')->where('id', 1)->first()->wins;
-        return view('front.home', compact('chest', 'wins'));
+        if ($wins >= AdminController::getConfigValue('max_winners_count')) {
+            $message = 'For today, all griffins have been defeated. Come back tomorrow to try again!';
+            $canPlay =  false;
+        }
+
+        $now = Carbon::now();
+        $yesterday = $now->subDay();
+        $prizeCount = Prize::where('user_id', $user->id)
+            ->where('received_at', '>=', $yesterday)
+            ->count();
+
+        if ($prizeCount >= AdminController::getConfigValue('max_prize_count')) {
+            $message = 'All the griffins run away at the sight of you. Come back tomorrow to try again!';
+            $canPlay = false;
+        }
+
+        return view('front.home', compact('chest', 'wins', 'canPlay', 'message'));
     }
 
     function chatGPT()
@@ -305,9 +320,10 @@ class Front extends Controller
                 'scene' => 0,
             ], 200);
         };
-        $scene = Auth::user()->scene;
+        $user = Auth::user();
+        $scene = $user->scene;
         $help = '';
-        $boss = DB::table('users')->where('id', Auth::user()->id)->first()->boss;
+        $boss = DB::table('users')->where('id', $user->id)->first()->boss;
         if ($scene == 2) {
             $bossStates = substr($boss, 0, 3);
             $bossStatesArr = array(
@@ -462,14 +478,14 @@ class Front extends Controller
         );
 
         $weapons = array('0', '0');
-        if (strlen(Auth::user()->weapons) > 1) {
-            $weapons[0] = Auth::user()->weapons[0];
-            $weapons[1] = Auth::user()->weapons[1];
+        if (strlen($user->weapons) > 1) {
+            $weapons[0] = $user->weapons[0];
+            $weapons[1] = $user->weapons[1];
         }
         $magic = array('0', '0');
-        if (strlen(Auth::user()->magic) > 1) {
-            $magic[0] = Auth::user()->magic[0];
-            $magic[1] = Auth::user()->magic[1];
+        if (strlen($user->magic) > 1) {
+            $magic[0] = $user->magic[0];
+            $magic[1] = $user->magic[1];
         }
         $choiсes = array(
             array(
@@ -567,27 +583,27 @@ class Front extends Controller
         );
         // Slava <
 
-        if (Auth::user()->scene == 4 || Auth::user()->scene == 5) {
-            $weapons = Auth::user()->weapons;
-            DB::table('users')->where('id', Auth::user()->id)->update(['weapons' => $weapons . request('choice')]);
+        if ($user->scene == 4 || $user->scene == 5) {
+            $weapons = $user->weapons;
+            DB::table('users')->where('id', $user->id)->update(['weapons' => $weapons . request('choice')]);
         }
-        if (Auth::user()->scene == 6 || Auth::user()->scene == 7) {
-            $magic = Auth::user()->magic;
-            DB::table('users')->where('id', Auth::user()->id)->update(['magic' => $magic . request('choice')]);
+        if ($user->scene == 6 || $user->scene == 7) {
+            $magic = $user->magic;
+            DB::table('users')->where('id', $user->id)->update(['magic' => $magic . request('choice')]);
         }
         $combination = '';
-        if (Auth::user()->scene > 7) {
-            $combination = Auth::user()->combination;
+        if ($user->scene > 7) {
+            $combination = $user->combination;
             $combination = $combination . request('choice');
-            DB::table('users')->where('id', Auth::user()->id)->update(['combination' => $combination]);
+            DB::table('users')->where('id', $user->id)->update(['combination' => $combination]);
         }
 
         $scene++;
-        DB::table('users')->where('id', Auth::user()->id)->update(['scene' => $scene]);
+        DB::table('users')->where('id', $user->id)->update(['scene' => $scene]);
 
         $acces = true;
         if ($scene == 11) {
-            DB::table('users')->where('id', Auth::user()->id)->update(['log' => substr($boss, 0, 3) . '/' . $combination]);
+            DB::table('users')->where('id', $user->id)->update(['log' => substr($boss, 0, 3) . '/' . $combination]);
             if (substr($boss, 0, 3) == $combination) {
                 $acces = true;
             } else {
@@ -596,16 +612,18 @@ class Front extends Controller
         }
         if ($scene == 12) {
             $wins = DB::table('chest')->where('id', 1)->first()->wins;
-            if ($boss == $combination && $wins < 6) {
+            if ($boss == $combination && $wins < AdminController::getConfigValue('max_winners_count')) {
                 $acces = true;
-                DB::table('users')->where('id', Auth::user()->id)->update(['win' => now()]);
+                DB::table('users')->where('id', $user->id)->update(['win' => now()]);
                 DB::table('chest')->where('id', 1)->increment('wins', 1);
 
-                DB::table('users')->where('id', Auth::user()->id)->update(['scene' => 0]);
-                DB::table('users')->where('id', Auth::user()->id)->update(['magic' => '']);
-                DB::table('users')->where('id', Auth::user()->id)->update(['weapons' => '']);
-                DB::table('users')->where('id', Auth::user()->id)->update(['combination' => '']);
-                DB::table('users')->where('id', Auth::user()->id)->update(['boss' => implode('', [rand(0, 2), rand(0, 5), rand(0, 2), rand(0, 2)])]);
+                DB::table('users')->where('id', $user->id)->update(['scene' => 0]);
+                DB::table('users')->where('id', $user->id)->update(['magic' => '']);
+                DB::table('users')->where('id', $user->id)->update(['weapons' => '']);
+                DB::table('users')->where('id', $user->id)->update(['combination' => '']);
+                DB::table('users')->where('id', $user->id)->update(['boss' => implode('', [rand(0, 2), rand(0, 5), rand(0, 2), rand(0, 2)])]);
+
+                $this->generatePrize($user);
                 // $scene = 0;
             } else {
                 $acces = false;
@@ -613,19 +631,19 @@ class Front extends Controller
         }
 
         if ($acces != true) {
-            DB::table('users')->where('id', Auth::user()->id)->update(['scene' => 0]);
-            DB::table('users')->where('id', Auth::user()->id)->update(['magic' => '']);
-            DB::table('users')->where('id', Auth::user()->id)->update(['weapons' => '']);
-            DB::table('users')->where('id', Auth::user()->id)->update(['combination' => '']);
-            DB::table('users')->where('id', Auth::user()->id)->update(['boss' => implode('', [rand(0, 2), rand(0, 5), rand(0, 2), rand(0, 2)])]);
+            DB::table('users')->where('id', $user->id)->update(['scene' => 0]);
+            DB::table('users')->where('id', $user->id)->update(['magic' => '']);
+            DB::table('users')->where('id', $user->id)->update(['weapons' => '']);
+            DB::table('users')->where('id', $user->id)->update(['combination' => '']);
+            DB::table('users')->where('id', $user->id)->update(['boss' => implode('', [rand(0, 2), rand(0, 5), rand(0, 2), rand(0, 2)])]);
             $scene = 13;
         }
         return response()->json([
             'scene' => $scene,
             'choice' => request('choice'),
-            'weapons' => Auth::user()->weapons,
-            'magic' => Auth::user()->magic,
-            'attemps' => Auth::user()->attemps,
+            'weapons' => $user->weapons,
+            'magic' => $user->magic,
+            'attemps' => $user->attemps,
             'chest' => DB::table('chest')->first()->attemps,
 
             'text' => $texts[$scene][request('choice')],

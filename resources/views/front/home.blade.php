@@ -79,7 +79,7 @@
         $('.popup-2').hide();
     }
 </script>
-@if ($wins < 6)
+@if ($canPlay)
     <section id="game" style="background-image: url(/game/images/game/environment/forest/Bg.png)">
         <div class="game-container">
             <div class="popup popup-1" style="display: none;">
@@ -170,7 +170,7 @@
         </div>
     </section>
 @else
-    Вся казна разыграна! Возвращайтесь завтра!
+    {$message}
 @endif
 <style>
 
