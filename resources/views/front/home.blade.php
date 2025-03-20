@@ -191,7 +191,7 @@
             </div>
             @else
                 <div style="color: white; display: flex; justify-content: center; align-items: center; text-align: center; height: 100%; flex-direction: column; gap: 30px;">
-                    {{$message}}
+                    <h2>{{$message}}</h2>
                     <button href="../" class="btn action">Back to site</button>
                 </div>
             @endif
