@@ -61,6 +61,7 @@ Route::post('/user/add_coins', [Front::class, 'addCoins']);
 Route::post('/subscribe', [Front::class, 'subscribe']);
 Route::post('/repost', [Front::class, 'storeLink']);
 Route::post('/start', [Front::class, 'startGame']);
+Route::get('/last-prize', [Front::class, 'getLastPrize']);
 
 Route::get('/solana-balance', [Front::class, 'getSolanaTokenBalance']);
 

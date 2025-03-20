@@ -78,6 +78,10 @@
     function closePopup2() {
         $('.popup-2').hide();
     }
+
+    function closePopup2() {
+        $('.popup-3').hide();
+    }
 </script>
 @if ($canPlay)
     <section id="game" style="background-image: url(/game/images/game/environment/forest/Bg.png)">
@@ -102,6 +106,14 @@
                     <input class="action repost-input" placeholder="Repost from X"/>
                     <button class="btn action" onclick="confirmRepost()">Confirm</button>
                     <button class="btn action" onclick="closePopup2()">Close</button>
+                </div>
+            </div>
+            <div class="popup-3 popup" style="display: none; z-index: 999999;">
+                <div class="flex">
+                    <h3 style="color: white">Your code:</h3>
+                    <input class="action repost-input" placeholder="Loading code..." disabled/>
+                    <button class="btn action" onclick="copyCode()">Confirm</button>
+                    <button class="btn action" onclick="closePopup3()">Close</button>
                 </div>
             </div>
             <div class="cutscences">
@@ -301,7 +313,7 @@
             url: '/game/choice',
             method: 'POST',
             data: {choice: choiceNumber},
-            success: function (response) {
+            success: async function (response) {
 
                 if (response.success) {
 
@@ -380,6 +392,12 @@
                         $('.buy').show();
                         $('.btn.to-site').show();
                         $('.btn.free-game').show();
+                        fetch(`/game/last-prize`)
+                            .then(res => res.json())
+                            .then(data => {
+                                console.log(data);
+                            });
+                        $('.popup-3').show();
                     } else if (response.scene == 13) {
                         $('.cutscences').removeClass('hide');
                         $('.cutscences #intro').hide();

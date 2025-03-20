@@ -29,6 +29,12 @@ class Front extends Controller
         return response()-> json(['value' => AdminController::getConfigValue($key)]);
     }
 
+    public function getLastPrize() {
+        $user = Auth::user();
+        $lastPrize = Prize::where(['user_id' => $user->id])->orderBy('id', 'desc')->first();
+        return response()-> json(['lastPrize' => $lastPrize]);
+    }
+
     public function generatePrize($user)
     {
         if (!$user) {
