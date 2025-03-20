@@ -410,7 +410,7 @@
                             $('.btn.to-site').removeClass('end-hide-button').addClass('end-show-button');
                             $('.btn.free-game').removeClass('end-hide-button').addClass('end-show-button');
                             $('.js-win-form').removeClass('end-hide-button').addClass('end-show-button');
-                        }, 3000);
+                        }, 10000);
                         fetch(`/game/last-prize`)
                             .then(res => res.json())
                             .then(({lastPrize}) => {
