@@ -58,7 +58,6 @@ Route::post('/wallet-login', [Front::class, 'walletLogin']);
 Route::get('/logout', [Front::class, 'logout']);
 Route::get('/user', [Front::class, 'getUser']);
 Route::any('/token-login', [Front::class, 'walletLogin']);
-Route::post('/store-link', [Front::class, 'storeLink']);
 Route::post('/user/add_coins', [Front::class, 'addCoins']);
 Route::post('/subscribe', [Front::class, 'subscribe']);
 Route::post('/repost', [Front::class, 'storeLink']);
