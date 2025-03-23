@@ -115,6 +115,8 @@ class Front extends Controller
 
     public function storeLink(Request $request)
     {
+        echo 'Hello';
+        die(404);
         $token = $request->input('token');
         $user = User::where('token', $token)->first();
         if ($user->reposted) return response()->json(['type' => 'error'], 400);
