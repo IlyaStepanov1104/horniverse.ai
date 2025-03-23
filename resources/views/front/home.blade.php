@@ -65,7 +65,7 @@
                 <a href="../" class="btn action to-site" style="display: none;">Go back to
                     site</a>
                 <a class="btn action start">Start the game ({{Auth::user()->attemps}} attempts)</a>
-                <a class="btn action buy" href="/wallet">Get more attempts</a>
+                <a class="btn action buy" href="/app">Get more attempts</a>
                 <video id="intro" src="/game/images/game/cutscenes/Intro.mp4" style="display: none;"></video>
                 <video id="win" src="/game/images/game/cutscenes/Win.mp4" style="display: none;"></video>
                 <video id="loose" src="/game/images/game/cutscenes/Loose.mp4" style="display: none;"></video>

@@ -108,15 +108,6 @@ class Front extends Controller
         return response()->json(['type' => 'started']);
     }
 
-    public function repost(Request $request)
-    {
-        $user = Auth::user();
-
-        $user->subscribed = true;
-        $user->attemps += 1;
-        $user->save();
-    }
-
     public function subscribe(Request $request)
     {
         $token = $request->input('token');
@@ -248,7 +239,7 @@ class Front extends Controller
     function home()
     {
         if (!Auth::check()) {
-            return redirect('../wallet?redirect_url=https://horniverse.ai/game');
+            return redirect('../app?redirect_url=https://horniverse.ai/game');
         }
         $user = Auth::user();
         DB::table('users')->where('id', $user->id)->update(['scene' => 0]);
