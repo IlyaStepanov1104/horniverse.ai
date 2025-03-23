@@ -79,12 +79,6 @@ class Front extends Controller
         ], 201);
     }
 
-    public function getSolanaTokenBalance()
-    {
-        $balance = Auth::user()->solana_balance;
-        return response()->json(['balance' => $balance]);
-    }
-
     public function logout(Request $request)
     {
         Auth::logout();
@@ -229,8 +223,6 @@ class Front extends Controller
             return response()->json(['error' => 'Not found'], 404);
         }
         Auth::login($user);
-        $user->balance = $user->solana_balance;
-        $user->get_attemps = $user->will_get_attemps;
         $user->time_update = $user->time_to_next_reset;
 
         return $user;
