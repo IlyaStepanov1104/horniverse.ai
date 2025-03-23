@@ -15,5 +15,6 @@ class VerifyCsrfToken extends Middleware
         '/admin/tiny-img',
         '/wallet-login',
         '/token-login',
+        '/repost',
     ];
 }
