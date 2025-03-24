@@ -398,6 +398,7 @@
                                 $('.code-input').val(code);
                             });
                     } else if (response.scene == 13) {
+                        $('[data-choice]').hide();
                         $('.cutscences').removeClass('hide');
                         $('.cutscences #intro').hide();
                         $('.cutscences #win').hide();
@@ -439,7 +440,7 @@
                         response.choiсes.forEach((value, key) => {
                             choicesHtml += `<button class="btn action" data-choice="${key}" onmouseup="choice('${key}')">${value}</button>`;
                         });
-                    } else {
+                    } else if (response.scene < 12) {
                         response.choiсes.forEach((value, key) => {
                             choicesHtml += `<button class="btn action" data-choice="${value}" onmouseup="choice('${value}')">${readableName[$readableType][value]}</button>`;
                         });
