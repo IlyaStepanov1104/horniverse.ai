@@ -53,7 +53,7 @@
 <section id="game" style="background-image: url(/game/images/game/environment/forest/Bg.png)">
     <div class="game-container">
         @if ($canPlay)
-            <div class="cutscences" style="transition: opacity 2s ease-in-out;">
+            <div class="cutscences">
                 <div class="flex js-win-form win-form" style="display: none;">
                     <h3 style="color: white">Your prize code:</h3>
                     <input class="action code-input" placeholder="Loading code..." disabled/>
