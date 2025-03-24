@@ -248,6 +248,11 @@ class Front extends Controller
             $canPlay =  false;
         }
 
+        if (intval(AdminController::getConfigValue('stoped_game'))) {
+            $message = 'The griffons are busy fixing this site right now. Come back after finishing the service work!';
+            $canPlay =  false;
+        }
+
         $now = Carbon::now();
         $yesterday = $now->subDay();
         $timer = $user->time_to_next_reset;
