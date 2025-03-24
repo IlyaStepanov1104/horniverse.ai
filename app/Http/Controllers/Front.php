@@ -255,7 +255,7 @@ class Front extends Controller
 
         $now = Carbon::now();
         $yesterday = $now->subDay();
-        $timer = gmdate("H:i:s", Carbon::tomorrow()->startOfDay());
+        $timer = gmdate("H:i:s", Carbon::tomorrow()->startOfDay()->diffInSeconds(Carbon::now()));
         $prizeCount = Prize::where('user_id', $user->id)
             ->where('received_at', '>=', $yesterday)
             ->count();
