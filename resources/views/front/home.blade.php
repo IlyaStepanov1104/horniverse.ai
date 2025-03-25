@@ -66,10 +66,10 @@
                     site</a>
                 <a class="btn action start">Start the game ({{Auth::user()->attemps}} attempts)</a>
                 <a class="btn action buy" href="/app">Get more attempts</a>
-                <video id="intro" src="/game/images/game/cutscenes/Intro.mp4" style="display: none;"></video>
-                <video id="win" src="/game/images/game/cutscenes/Win.mp4" style="display: none;"></video>
-                <video id="loose" src="/game/images/game/cutscenes/Loose.mp4" style="display: none;"></video>
-                <video id="loose-2" src="/game/images/game/cutscenes/Loose-2.mp4" style="display: none;"></video>
+                <video playsinline id="intro" src="/game/images/game/cutscenes/Intro.mp4" style="display: none;"></video>
+                <video playsinline id="win" src="/game/images/game/cutscenes/Win.mp4" style="display: none;"></video>
+                <video playsinline id="loose" src="/game/images/game/cutscenes/Loose.mp4" style="display: none;"></video>
+                <video playsinline id="loose-2" src="/game/images/game/cutscenes/Loose-2.mp4" style="display: none;"></video>
                 <a class="btn skip" style="display: none;">Skip</a>
             </div>
 
