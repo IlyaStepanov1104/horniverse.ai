@@ -232,9 +232,7 @@ class Front extends Controller
     function home()
     {
         if (!Auth::check()) {
-            return response()->json(['cookie' => $_COOKIE, 'auth' => Auth::user(), 'session' => session()], 200);
-            return 'redirect';
-//            return redirect('../app');
+            return redirect('../app');
         }
         $user = Auth::user();
         DB::table('users')->where('id', $user->id)->update(['scene' => 0]);
