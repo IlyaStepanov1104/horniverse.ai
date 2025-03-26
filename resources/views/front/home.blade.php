@@ -382,7 +382,7 @@
                         $('.cutscences #intro').hide();
                         $('.cutscences #win').show();
                         $('.cutscences #win')[0].play();
-                        $('.btn.start').addClass('end-hide-button').show().attr('href', '/game/').text('Restart the game ({{Auth::user()->attemps ? Auth::user()->attemps - 1 : 0}} attempts)').addClass('restart');
+                        $('.btn.start').addClass('end-hide-button').show().attr('href', '/game/').html('Restart the game<br/>({{Auth::user()->attemps ? Auth::user()->attemps - 1 : 0}} attempts)').addClass('restart');
                         $('.buy').addClass('end-hide-button').show();
                         $('.btn.to-site').addClass('end-hide-button').show();
                         $('.js-win-form').addClass('end-hide-button').show();
