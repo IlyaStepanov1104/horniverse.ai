@@ -188,6 +188,7 @@
     let interval;
 
     $('.start').click(function () {
+        if ($(this).attr('href')) return;
         $.ajax({
             url: '/game/start',
             method: 'POST',

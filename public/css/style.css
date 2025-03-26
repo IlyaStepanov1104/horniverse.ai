@@ -471,6 +471,11 @@ div {
     margin: 0;
     width: 100% !important;
 }
+
 input {
     border: 5px solid #08262a;
+}
+
+.code-input {
+    background-color: #FFFFFF;
 }
