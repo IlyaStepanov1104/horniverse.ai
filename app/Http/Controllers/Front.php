@@ -232,7 +232,8 @@ class Front extends Controller
     function home()
     {
         if (!Auth::check()) {
-            return redirect('../app');
+            return 'redirect';
+//            return redirect('../app');
         }
         $user = Auth::user();
         DB::table('users')->where('id', $user->id)->update(['scene' => 0]);
