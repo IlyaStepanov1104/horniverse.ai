@@ -174,8 +174,8 @@ div {
   max-width: 100%;
   height: auto;
   min-height: 100vh;
-  -o-object-fit: cover;
-     object-fit: cover;
+  -o-object-fit: fill;
+     object-fit: fill;
   position: absolute;
 }
 
