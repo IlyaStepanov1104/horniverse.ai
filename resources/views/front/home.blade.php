@@ -62,7 +62,7 @@
                     <button class="btn action" onclick="copyCode()">Copy prize code</button>
                     <button class="btn action" onclick="sendTelegram()">Confirm</button>
                 </div>
-                <a href="../" class="btn action to-site" style="display: none;">Go back to
+                <a href="../" class="btn action to-site" style="display: none;">Back to
                     site</a>
                 <a class="btn action start">Start the game ({{Auth::user()->attemps}} attempts)</a>
                 <a class="btn action buy" href="/app">Get more attempts</a>
