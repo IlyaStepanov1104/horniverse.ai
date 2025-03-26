@@ -36,6 +36,7 @@ class Front extends Controller
             ->select('users.wallet_address', DB::raw('COUNT(prizes.id) as wins'))
             ->leftJoin('prizes', 'users.id', '=', 'prizes.user_id')
             ->groupBy('users.wallet_address')
+            ->where('is_admin', 0)
             ->orderByDesc('wins')
             ->limit(10)
             ->get();
