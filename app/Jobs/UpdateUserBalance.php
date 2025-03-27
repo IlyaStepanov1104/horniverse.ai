@@ -53,6 +53,8 @@ class UpdateUserBalance implements ShouldQueue
         $silverLimit = AdminController::getConfigValue('silver_attempts');
         $bronzeLimit = AdminController::getConfigValue('bronze_attempts');
 
+        DB::table('users')->where('id', $this->user->id)->update(['reposted' => 0, 'subscribed' => 0]);
+
         if ($balance > $goldLimit) {
             DB::table('users')->where('id', $this->user->id)->increment('attemps', 10);
         } else if ($balance > $silverLimit) {

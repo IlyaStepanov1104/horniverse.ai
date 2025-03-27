@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Configuration;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,19 @@ class UpdateUserAttempts extends Command
                     UpdateUserBalance::dispatch($user);
                 }
             });
+
+        $tomorrowConfig = Configuration::where('key', 'x-tomorrow-link')->first();
+        Configuration::updateOrCreate(
+            ['key' => 'x-post-link'],
+            ['value' => $tomorrowConfig->value]
+        );
+
+
+        $tomorrowConfig = Configuration::where('key', 'telegram-tomorrow-link')->first();
+        Configuration::updateOrCreate(
+            ['key' => 'telegram-link'],
+            ['value' => $tomorrowConfig->value]
+        );
 
         $this->info('User attempts update dispatched successfully.');
     }
